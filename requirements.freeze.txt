@@ -1,0 +1,15 @@
+Flask==0.11.1
+Flask-Mail==0.9.1
+Flask-WTF==0.12
+Jinja2==2.8
+MarkupSafe==0.23
+WTForms==2.1
+Werkzeug==0.11.11
+Whoosh==2.7.4
+beautifulsoup4==4.5.1
+blinker==1.4
+click==6.6
+gunicorn==19.6.0
+itsdangerous==0.24
+requests==2.11.1
+template_remover==0.1.9

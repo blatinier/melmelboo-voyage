@@ -1,0 +1,19 @@
+{% extends "who_are_we/layout.html" %}
+{% block panel %}
+<br />
+Voici notre galerie de portraits de famille ! Nous nous amusons à nous photographier tous ensemble une fois par semaine pour <strong>le projet 52</strong> de Camille. On trouve rigolo de voir évoluer notre famille au fil des semaines et nous comptons imprimer un livre à emporter avec nous en voyage et qui clôturera joliement cette série 2016. N'hésitez pas à cliquer sur les photographies pour les agrandir.
+<br />
+<br />
+<div class="row">
+  {% for elt in images %}
+    {% if loop.index0 % 3 == 0 %}
+      </div>
+      <div class="row">
+    {% endif %}
+    <div class="col-lg-4 col-xs-12 row-images">
+      <img src="{{elt.image}}" alt="{{elt.title}}"
+           title="{{elt.title}}" style="width:100%" />
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

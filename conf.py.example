@@ -1,0 +1,43 @@
+PLATFORM_URL = 'http://www.melmelboo-voyage.fr'
+SECRET_KEY = 'test'
+
+MAIL_SENDER_ADDR = 'my@email.com'
+MAIL_SENDER_MDP = 'test'
+
+INDEX_DIR = "/var/lib/whoosh/voyage"
+INDEX_NAME = "melmelboo-voyage"
+
+BLOG_VOYAGE_DB = "/path/to/voyage/blog/ghost.db"
+BLOG_MELMELBOO_DB = "/path/to/melmelboo/blog/ghost.db"
+
+PAGE_SIZE = 6
+STATIC_TPL = {"cc_caracs": {"tpl_file": 'camping_car/caracteristics.html',
+                            "url": '/baloo-notre-camping-car/caracteristics',
+                            "title": 'Le camping car - Caractéristiques techniques',
+                            "active-menu": "camping_car",
+                            "active-panel": "caracs",
+                            "image": "/img/articles/2016/Camping-car01.JPG"},
+              "cc_visit": {"tpl_file": 'camping_car/visit.html',
+                           "url": '/baloo-notre-camping-car',
+                           "title": 'Le camping car - Visite guidée',
+                           "active-menu": "camping_car",
+                           "active-panel": "visit",
+                           "image": "/img/articles/2016/Camping-car01.JPG"},
+              "budget": {"tpl_file": 'planning/budget.html',
+                         "url": '/preparation',
+                         "title": 'Préparation - Le Budget',
+                         "active-menu": "preparation",
+                         "active-panel": "budget",
+                          "image": "/img/articles/2016/Financer_son_voyage03.JPG"},
+              "vaccins": {"tpl_file": 'planning/vaccins.html',
+                          "url": '/preparation/vaccins',
+                          "title": 'Préparation - Les Vaccins',
+                          "active-menu": "preparation",
+                          "active-panel": "vaccins",
+                          "image": "/img/articles/2016/Vaccin03.JPG"},
+              "who_are_we": {"tpl_file": 'who_are_we/who_are_we.html',
+                             "url": "/qui-sommes-nous",
+                             "title": "Qui sommes nous ?",
+                             "active-menu": "who_are_we",
+                             "active-panel": "who_are_we",
+                             "image": "/img/articles/2016/52-13.JPG"}}

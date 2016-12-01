@@ -1,0 +1,21 @@
+{{!-- This is the post loop - each post will be output using this markup --}}
+{{#foreach posts}}
+<article class="{{post_class}} row">
+  <header class="col-lg-4">
+    <a href="{{url}}">
+      <img style="width:92%;" alt="{{title}}" src="{{image}}" />
+    </a>
+  </header>
+  <section class="post-excerpt col-lg-8">
+    <a href="{{url}}">
+      <h2 class="post-title">{{title}}</h2>
+      <p>{{excerpt words="45"}}...</p>
+      <p class="read-more">Lire la suite →</p>
+    </a>
+  </section>
+</article>
+{{/foreach}}
+
+<div class="clearfix"></div>
+{{!-- Previous/next page links - only displayed on page 2+ --}}
+{{pagination}}

@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="content col-lg-9">
+<article class="post page">
+  <header class="post-header">
+    <h1 class="post-title">Baloo, notre camping car</h1>
+  </header>
+  <section class="post-content">
+<img src="/images/globe1.jpg" id="globe" alt="globe" />
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li {%- if panel == "visit" %} class="active" {%- endif %}>
+    <a class="sub-title" href="{{ url_for('cc_visit') }}">Visite guidée</a>
+  </li>
+  <li {%- if panel == "caracs" %} class="active" {%- endif %}>
+    <a class="sub-title" href="{{ url_for('cc_caracs') }}">Caractéristiques techniques</a>
+  </li>
+  <li {%- if panel == "linked_posts" %} class="active" {%- endif %}>
+    <a class="sub-title" href="{{ url_for('camping_car_linked_posts') }}">Articles liés</a>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active">
+      {% block panel %}{% endblock %}
+  </div>
+</div>
+</section>
+</article>
+</main>
+{% endblock %}
+

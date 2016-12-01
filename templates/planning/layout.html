@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="content col-lg-9">
+<article class="post page">
+  <header class="post-header">
+    <h1 class="post-title">Préparation</h1>
+  </header>
+  <section class="post-content">
+    <img src="/images/globe1.jpg" id="globe" alt="globe" />
+    <ul class="nav nav-tabs" role="tablist">
+      <li {%- if panel == "budget" %} class="active" {%- endif %}>
+        <a class="sub-title" href="{{ url_for('budget') }}">
+          Budget
+        </a>
+      </li>
+      <li {%- if panel == "vaccins" %} class="active" {%- endif %}>
+        <a class="sub-title" href="{{ url_for('vaccins') }}">
+          Vaccins
+        </a>
+      </li>
+      <li {%- if panel == "linked_posts" %} class="active" {%- endif %}>
+        <a class="sub-title" href="{{ url_for('planning_linked_posts') }}">
+          Articles liés
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active">
+      {% block panel %}{% endblock %}
+      </div>
+    </div>
+  </section>
+</article>
+</main>
+{% endblock %}

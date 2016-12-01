@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+<main id="content-home" class="content col-lg-9">
+<h1>Une famille autour du monde</h1>
+<div class="slide">
+  <div>
+    <img style="width:100%;" src="/images/Etretat.jpg" alt="Etretat" />
+  </div>
+  <div>
+    <img style="width:100%;" src="/images/Embrun.jpg" alt="Embrun" />
+  </div>
+  <div>
+    <img style="width:100%;" src="/images/Chaudefour.jpg" alt="Chaudefour" />
+  </div>
+  <div>
+    <img style="width:100%;" src="/images/Ile-d-Arz.jpg" alt="Ile-d-Arz" />
+  </div>
+  <div>
+    <img style="width:100%;" src="/images/Ile-de-Sein.jpg" alt="Ile-de-Sein" />
+  </div>
+  <div>
+    <img style="width:100%;" src="/images/Paris-Mirabeau.jpg" alt="Paris-Mirabeau" />
+  </div>
+  <div>
+    <img style="width:100%;" src="/images/Paris-Pompidou.jpg" alt="Paris-Pompidou" />
+  </div>
+  <div>
+    <img style="width:100%;" src="/images/Venise.jpg" alt="Venise" />
+  </div>
+</div>
+</main>
+{% endblock %}
+{% block footer %}
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.slide').slick({
+      autoplay: true,
+      arrows: false,
+      fade: true,
+      infinite: true,
+      speed: 500,
+      fade: true,
+      cssEase: 'linear',
+      respondTo: 'min'
+    });
+  });
+</script>
+{% endblock %}

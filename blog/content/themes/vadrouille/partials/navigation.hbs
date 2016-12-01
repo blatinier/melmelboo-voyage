@@ -1,0 +1,80 @@
+<button type="button" data-toggle="collapse"
+        data-target="#site-menu" id="menu-drop">
+  <img src="/images/icon-menu.svg" alt="menu" />
+</button>
+<div class="col-lg-3 collapse" id="site-menu">
+<nav class="col-lg-3 sidebar navbar-fixed-top nav-menu">
+  <div class="container-fluid">
+  <img id="logo" src="{{asset "images/header.jpg" }}"
+       alt="melmelboo-voyage"
+       onclick="javascript:window.location='/'" />
+  <ul class="nav nav-sidebar nav-stacked" id="main-menu">
+    <li class="visible-md-block visible-lg-block"><br /></li>
+    <li role="presentation">
+        <a {{#is "post"}}class="current"{{/is}} title="Le blog" href="/blog/">Blog</a>
+    </li>
+    <li class="visible-md-block visible-lg-block"><br /></li>
+    <li role="presentation">
+      <a title="Quel est notre projet" href="/blog/le-projet/">Le projet</a>
+    </li>
+    <li role="presentation">
+      <a title="Nous !" href="/qui-sommes-nous">Qui sommes-nous ?</a>
+    </li>
+    <li role="presentation">
+      <a title="Baloo !" href="/baloo-notre-camping-car">Notre camping car</a>
+    </li>
+    <li role="presentation">
+        <a title="Tous les préparatifs" href="/preparation">Préparation</a>
+    </li>
+    <li role="presentation">
+        <a title="Notre itinéraire" href="/blog/itineraire/">Itineraire</a>
+    </li>
+    <li role="presentation">
+        <a title="Contactez nous !" href="/contact">Nous Contacter</a>
+    </li>
+        <li role="presentation">
+          <input type="image" id="submit-search"
+                 src="/images/search.svg" alt="Search" />
+          <input type="text" id="search" placeholder="rechercher" />
+        </li>
+  </ul>
+  <ul class="social">
+    <li>
+      <a title="Instagram" href="http://instagram.com/melmelbooo">
+        <img class="social_icon"
+             src="/images/social/instagram.png"
+             alt="Instagram" />
+      </a>
+    </li>
+    <li>
+      <a title="Facebook" href="http://www.facebook.com/melmelboo">
+        <img class="social_icon"
+             src="/images/social/facebook.png"
+             alt="Facebook" />
+      </a>
+    </li>
+    <li>
+      <a title="Hellocoton" href="http://www.hellocoton.fr/mapage/melmelboo-voyage">
+        <img class="social_icon"
+             src="/images/social/hellocoton.png"
+             alt="Hellocoton" />
+      </a>
+    </li>
+    <li>
+      <a title="Pinterest" href="http://www.pinterest.com/melmelboo">
+        <img class="social_icon"
+             src="/images/social/pinterest.png"
+             alt="Pinterest" />
+      </a>
+    </li>
+    <li>
+      <a title="Flux RSS" href="/blog/rss">
+        <img class="social_icon"
+             src="/images/social/feed.png"
+             alt="RSS" />
+      </a>
+    </li>
+  </ul>
+  </div>
+</nav>
+</div>

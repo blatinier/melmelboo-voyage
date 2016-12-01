@@ -1,0 +1,21 @@
+{% extends "planning/layout.html" %}
+{% block panel %}
+<br/>
+<br/>
+{% for post in posts %}
+  <article class="row">
+    <header class="col-lg-4">
+      <a href="/blog/{{post.slug}}">
+        <img style="width:92%;" alt="{{post.title}}" src="{{post.image}}" />
+      </a>
+    </header>
+    <section class="post-excerpt col-lg-8">
+      <a href="/blog/{{post.slug}}">
+        <h2 class="post-title">{{post.title}}</h2>
+        <p>{{post.excerpt}}...</p>
+        <p class="read-more">Lire la suite →</p>
+      </a>
+    </section>
+  </article>
+{% endfor %}
+{% endblock %}

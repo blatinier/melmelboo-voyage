@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="content col-lg-9">
+{%- if success %}
+  <div class="success">Merci pour votre petit mot.</div>
+{% endif -%}
+<article class="post page">
+  <header class="post-header">
+    <h1 class="post-title" style="visibility:hidden;">a</h1>
+  </header>
+  <section class="post-content">
+    <img src="/images/globe1.jpg"
+         alt="globe" id="globe"/>
+    <h2 class="sub-title">Contactez-nous !</h2>
+      <p>Vous cherchez à nous contacter&nbsp;? Vous avez une question&nbsp;? Une proposition de partenariat&nbsp;? Vous souhaitez tout simplement nous encourager&nbsp;? Vous pouvez nous joindre grâce au formulaire de contact ci-dessous. N'hésitez pas, nous serons très heureux de vous lire&nbsp;!</p>
+  </section>
+</article>
+<section id="isso-thread">
+  <form action="{{ url_for('contact') }}" method=post>
+    <div class="isso-postbox">
+      <div class="form-wrapper">
+        {{ form.hidden_tag() }}
+        <p class="input-wrapper">
+{% for message in form.name.errors %}
+  <div class="bg-danger">{{ message }}</div>
+{% endfor -%}
+          <label for="name">Nom <small>(Obligatoire)</small></label>
+          {{ form.name }}<br/>
+        </p>
+        <p class="input-wrapper">
+{% for message in form.email.errors %}
+  <div class="bg-danger">{{ message }}</div>
+{% endfor -%}
+          <label for="email">Email <small>(Obligatoire)</small></label>
+          {{ form.email }}<br/>
+        </p>
+        <p class="input-wrapper">
+          <label for="website">Website</label>
+          {{ form.website(placeholder="http://") }} <br/>
+        </p>
+        <p class="textarea-wrapper">
+{% for message in form.message.errors %}
+  <div class="bg-danger">{{ message }}</div>
+{% endfor -%}
+          <label for="message">Message <small>(Obligatoire)</small></label>
+          {{ form.message(class="textarea placeholder") }}
+        </p>
+        <section class="auth-section">
+          <p class="post-action">
+            <input type="submit" value="Envoyer" />
+          </p>
+        </section>
+      </div>
+    </div>
+  </form>
+</section>
+</main>
+{% endblock %}

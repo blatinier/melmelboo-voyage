@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {{!-- Document Settings --}}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {{!-- Page Meta --}}
+    <title>{{meta_title}}</title>
+    <meta name="description" content="{{meta_description}}" />
+    <meta name="keywords" content="voyage, voyage en famille, voyage en camping car, tour autour du monde, tourdumondiste" />
+
+    {{!-- Mobile Meta --}}
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {{!-- Brand icon --}}
+    <link rel="shortcut icon" href="/images/favicon.ico">
+
+    {{!-- Styles'n'Scripts --}}
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{asset "css/screen.css"}}" />
+    <link rel="stylesheet" type="text/css" href="/css/isso.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400" />
+    <link href='//fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' id='google-fonts-css' href='//fonts.googleapis.com/css?subset=latin%2Clatin-ext%2Ccyrillic%2Ccyrillic-ext&#038;family=Lato%3A300%2C300italic%2C400%2C400italic%2C700%2C700italic%2C900%2C900italic%7CQuicksand%3A300%2C300italic%2C400%2C400italic%2C700%2C700italic%2C900%2C900italic+rel%3D%27stylesheet%27+type%3D%27text%2Fcss&#038;ver=4.1.1' type='text/css' media='all' />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
+    <link rel="stylesheet" type="text/css" href="/css/shadowbox.css" />
+    {{!-- Ghost outputs important style and meta data with this tag --}}
+    {{ghost_head}}
+</head>
+<body class="{{body_class}} nav-closed">
+ <noscript><p><img src="//stats.melmelboo.fr/piwik.php?idsite=3" style="border:0;" alt="" /></p></noscript>
+ <!-- End Piwik Code -->
+    <div class="site-wrapper container-fluid">
+      <div class="row">
+        {{!-- All the content gets inserted here, index.hbs, etc --}}
+        {{{body}}}
+      </div>
+    </div>
+    {{!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection --}}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/shadowbox.js"></script>
+    <script data-isso="//comments.melmelboo-voyage.fr/"
+            data-isso-avatar="false"
+            data-isso-require-author="true"
+            data-isso-lang="fr"
+            data-isso-css="false"
+            src="//comments.melmelboo-voyage.fr/js/embed.dev.js"></script>
+    <script type="text/javascript">
+      Shadowbox.init({displayCounter: false, displayNav: true});
+      $(function(){
+        $(".post-content img").not("#globe").not("#globe-loop-post").each(function(index){
+          $(this).wrap('<a href="'+$(this).attr("src")+'" rel="shadowbox[Gallerie]" />');
+        });
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/locale/fr.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      moment.locale('de');
+        $('.post-date').each(function (i, date) {
+          var $date = $(date);
+          $date.html(
+            moment($date.attr('datetime')).format('D [<br/>] MMMM [<br/>] YYYY')
+          );
+        });
+    });
+    // Current page menu highlight
+    $('.nav a').each(function() {
+      if($(this).attr('href') == window.location.pathname ||
+         $(this).attr('href') == window.location.href) {
+          $(this).addClass('current');
+      }
+    });
+    </script>
+    <script type="text/javascript" src="{{asset "js/index.js"}}"></script>
+    <script type="text/javascript" src="/js/search.js"></script>
+    {{!-- Ghost outputs important scripts and data with this tag --}}
+    {{ghost_foot}}
+</body>
+</html>

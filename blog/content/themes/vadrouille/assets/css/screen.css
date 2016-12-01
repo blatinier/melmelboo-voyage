@@ -1,0 +1,1046 @@
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%
+}
+body { margin: 0; }
+article, aside, details,
+footer, header,
+main, menu, nav,
+section, summary { display:block; }
+a { background-color: transparent;}
+a:active, a:hover { outline: 0; }
+b, strong { font-weight: bold; }
+h1 { font-size: 2em; margin: 0.67em 0; }
+img { border: 0; }
+hr { box-sizing: content-box; height: 0; }
+/* ==========================================================================
+   2. General - Setting up some base styles
+   ========================================================================== */
+html {
+  height: 100%;
+  max-height: 100%;
+  font-size: 62.5%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body {
+  height: 100%;
+  max-height: 100%;
+  font-family: "Merriweather", serif;
+  font-size: 1.8rem;
+  line-height: 1.75em;
+  color: #4A4A4A;
+  -webkit-font-feature-settings: 'kern' 1;
+  -moz-font-feature-settings: 'kern' 1;
+  -o-font-feature-settings: 'kern' 1;
+  text-rendering: geometricPrecision;
+}
+::-moz-selection {
+  background: #D6EDFF;
+}
+::selection {
+  background: #D6EDFF;
+}
+h1, h2, h3,
+h4, h5, h6 {
+  -webkit-font-feature-settings: 'dlig' 1, 'liga' 1, 'lnum' 1, 'kern' 1;
+  -moz-font-feature-settings: 'dlig' 1, 'liga' 1, 'lnum' 1, 'kern' 1;
+  -o-font-feature-settings: 'dlig' 1, 'liga' 1, 'lnum' 1, 'kern' 1;
+  color: #2E2E2E;
+  line-height: 1.15em;
+  margin: 0 0 0.4em 0;
+  font-family: "Open Sans", sans-serif;
+  text-rendering: geometricPrecision;
+}
+h1 {
+  font-size: 5rem;
+  letter-spacing: -2px;
+  text-indent: -3px;
+}
+h2 {
+  font-size: 3.6rem;
+}
+h3 {
+  font-size: 3rem;
+  letter-spacing: -0.6px;
+}
+h4 {
+  font-size: 2.5rem;
+}
+h5 {
+  font-size: 2rem;
+}
+h6 {
+  font-size: 2rem;
+}
+a {
+  color: #4A4A4A;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #111;
+}
+p, ul {
+  -webkit-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+  -moz-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+  -o-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+  margin: 0 0 1.75em 0;
+  text-rendering: geometricPrecision;
+}
+ul {
+  padding-left: 3rem;
+}
+li {
+  margin: 0.4em 0;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: #EFEFEF 1px solid;
+  margin: 3.2em 0;
+  padding: 0;
+}
+#content-home h1 {
+  font-family: "Open Sans Condensed","Helvetic",sans-serif;
+  font-size: 1.6em;
+  letter-spacing: 5px;
+  margin: 0;
+  padding: 15px 0;
+  text-transform: uppercase;
+}
+#content-home h2 {
+  text-transform: none;
+}
+article.post {
+  margin-top: 100px;
+  margin-bottom: 0;
+  width: 100%;
+}
+table {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 1.75em 0;
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+}
+
+table th,
+table td {
+  padding: 8px;
+  line-height: 20px;
+  text-align: left;
+  vertical-align: top;
+  border-top: #EFEFEF 1px solid;
+}
+
+table th { color: #000; }
+
+table caption + thead tr:first-child th,
+table caption + thead tr:first-child td,
+table colgroup + thead tr:first-child th,
+table colgroup + thead tr:first-child td,
+table thead:first-child tr:first-child th,
+table thead:first-child tr:first-child td {
+  border-top: 0;
+}
+
+table tbody + tbody { border-top: #EFEFEF 2px solid; }
+
+table table table { background-color: #FFF; }
+
+table tbody > tr:nth-child(odd) > td,
+table tbody > tr:nth-child(odd) > th {
+  background-color: #F6F6F6;
+}
+
+table.plain tbody > tr:nth-child(odd) > td,
+table.plain tbody > tr:nth-child(odd) > th {
+   background: transparent;
+}
+
+
+.post {
+  margin: 4rem auto;
+  padding-bottom: 4rem;
+  position: relative;
+  word-wrap: break-word;
+}
+
+article.post.head-loop {
+  margin-bottom: 3rem;
+  margin-left: 10em;
+  margin-top: 3rem;
+  width: auto;
+}
+.head-loop .post-content {
+  min-height: 0;
+}
+.post-content {
+  font-family: "Open Sans",sans-serif;
+  font-size: 0.73em;
+  font-style: normal;
+  line-height: 1.7em;
+  min-height: 75px;
+  text-align: justify;
+}
+.sub-title {
+  border-bottom: 1px solid #CCC;
+  font-family: "Open Sans Condensed",sans-serif;
+  font-size: 2em;
+  margin-bottom: 1.20em;
+  width: 100%;
+}
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+/* Wraps the main content & footer */
+.site-wrapper {
+  position: relative;
+  z-index: 10;
+  min-height: 100%;
+  background: #fff;
+  -webkit-transition: -webkit-transform 0.5s ease;
+      transition: transform 0.5s ease;
+}
+nav.nav-menu {
+  z-index:0;
+}
+.nav {
+  font-family: "Open Sans Condensed","Helvetic",sans-serif;
+  text-transform: uppercase;
+}
+.nav ul{
+  list-style-type: none;
+}
+.nav > li > a {
+    padding: 0 15px;
+}
+input#submit-search {
+  background: none;
+  border: none;
+  left: 15px;
+  position: absolute;
+  top: 10px;
+  width: 35px;
+}
+input#search {
+  color: #AAA;
+  display: inline-block;
+  font-style: italic;
+  margin-left: 15px;
+  margin-top: 10px;
+  padding-left: 35px;
+  width: 50%;
+}
+ul.social {
+  position: fixed;
+  bottom: 0;
+  padding: 0;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+ul.social li {
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 5px;
+}
+ul.social img {
+  height:23px;
+  width:23px;
+}
+.current {
+  background-color: #eee;
+}
+a.sub-title {
+  margin-bottom: 0;
+  text-transform: none;
+}
+.posts-loop {
+  float: left;
+}
+body:not(.post-template) header a {
+  text-decoration: none;
+}
+
+body:not(.post-template) header time {
+  font-family: Quicksand,Arial,sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  width: 95%;
+}
+
+body:not(.post-template) header h2.post-title {
+  text-align: center;
+}
+
+header h1.post-title, header h2.post-title {
+  font-family: "Open Sans Condensed",sans-serif;
+  font-size: 1.42em;
+  font-weight: 100;
+  letter-spacing: -0.6px;
+  text-transform: uppercase;
+  width: 95%;
+}
+
+.posts-loop .post-header img {
+  width: 95%;
+}
+main.content {
+  padding-right: 90px;
+}
+#content-home {
+  text-align: center;
+  text-transform: uppercase;
+}
+#content-home h1 {
+  font-family: "Open Sans Condensed",sans-serif;
+  font-size: 1.6em;
+  letter-spacing: 5px;
+  margin: 0;
+  padding: 15px 0;
+}
+/* Every post, on every page, gets this style on its <article> tag */
+main {
+  padding: 0 135px;
+}
+.posts-loop .post {
+  float: left;
+  margin: 0;
+}
+
+body .post-title {
+  font-size: 1.8rem;
+}
+
+.post-title a {
+  text-decoration: none;
+}
+
+.post-excerpt {
+  margin-left: -15px;
+  padding: 0;
+}
+
+.post-excerpt h2 {
+  font-family: "Open Sans Condensed",sans-serif;
+}
+
+.post-excerpt a {
+  text-decoration: none;
+}
+
+.post-excerpt p {
+  color: #4A4A4A;
+  font-family: "Open Sans",Helvetica,Arial,sans-serif;
+  font-size: 0.73em;
+  font-style: normal;
+  line-height: 1.5em;
+  margin: 15px 0 0 0;
+  min-height: 60px;
+  text-align: justify;
+  width: 95%;
+}
+
+.post-excerpt p.read-more:hover {
+  color: #889093;
+}
+.post-excerpt p.read-more {
+  color: black;
+  font-family: "Open Sans",Helvetica,Arial,sans-serif;
+  text-decoration: none;
+}
+
+.post-meta {
+  color: #9EABB3;
+  font-family: Quicksand,Arial,sans-serif;
+  font-size: 1.3rem;
+  line-height: 2.2rem;
+  text-transform: uppercase;
+}
+
+.post-meta a {
+  color: #9EABB3;
+  text-decoration: none;
+}
+
+.post-meta a:hover {
+  text-decoration: underline;
+}
+
+.post-date {
+  font-family: "Helvetica","Arial",sans-serif;
+  background-color: #ECEDED;
+  border-radius: 50%;
+  color: #636363;
+  float: left;
+  font-size: 0.6em;
+  height: 70px;
+  line-height: 1.3;
+  margin: 0;
+  padding-top: 13px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 70px;
+}
+.post-template .post-header {
+   margin-bottom: 3.4rem;
+}
+
+.post-template .page .post-title {
+  padding-left: 0;
+}
+.post-template .post-title {
+  margin-bottom: 50px;
+  padding-left: 85px;
+  padding-top: 20px;
+}
+
+.post-template .post-meta {
+  margin: 0;
+}
+
+/* Tweak the .post wrapper style */
+.post-template .post {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Kill that stylish little circle that was on the border, too */
+.post-template .post:after {
+  display: none;
+}
+
+/* Keep images centered, and allow images wider than the main
+   text column to break out. */
+.post-content a {
+  color: #aaa;
+}
+
+.post-content img {
+  border-radius: 10px;
+  height: auto;
+  max-width: 126%;
+  padding: 0.1em 0.1em;
+}
+
+.post-footer {
+  position: relative;
+  margin: 6rem 0 0 0;
+  padding: 3rem 0 0 0;
+  border-top: #EBF2F6 1px solid;
+}
+
+.post-footer h4 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.post-footer p {
+  margin: 1rem 0;
+  font-size: 1.4rem;
+  line-height: 1.75em;
+}
+
+/* list of author links - location / url */
+.author-meta {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  font-style: italic;
+  color: #9EABB3;
+}
+
+.author-meta a {
+  color: #9EABB3;
+}
+.author-meta a:hover {
+  color: #111;
+}
+
+/* Create some space to the right for the share links */
+.post-footer .author {
+  margin-right: 180px;
+}
+
+.post-footer h4 a {
+  color: #2e2e2e;
+  text-decoration: none;
+}
+
+.post-footer h4 a:hover {
+  text-decoration: underline;
+}
+
+/* Drop the share links in the space to the right.
+   Doing it like this means it's easier for the author bio
+   to be flexible at smaller screen sizes while the share
+   links remain at a fixed width the whole time */
+.post-footer .share {
+  position: absolute;
+  top: 3rem;
+  right: 0;
+  width: 140px;
+}
+
+.post-footer .share a {
+  font-size: 1.8rem;
+  display: inline-block;
+  margin: 1rem 1.6rem 1.6rem 0;
+  color: #BBC7CC;
+  text-decoration: none;
+}
+
+.post-footer .share .icon-twitter:hover {
+  color: #55acee;
+}
+.post-footer .share .icon-facebook:hover {
+  color: #3b5998;
+}
+.post-footer .share .icon-google-plus:hover {
+  color: #dd4b39;
+}
+
+.author-image {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  margin-left: -40px;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  overflow: hidden;
+  padding: 6px;
+  background: #fff;
+  z-index: 2;
+  box-shadow: #E7EEF2 0 0 0 1px;
+}
+
+.author-image .img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 100%;
+}
+.author-meta {
+  margin: 1.6rem 0;
+}
+.author-meta span {
+  display: inline-block;
+  margin: 0 2rem 1rem 0;
+  word-wrap: break-word;
+}
+.author-meta a {
+  text-decoration: none;
+}
+
+/* The main wrapper for our pagination links */
+.pagination .pagination-title {
+  font-style: italic;
+  text-transform: initial;
+}
+.center {
+  text-align: center;
+}
+.pagination {
+  border-top: 1px solid #CCC;
+  color: #9EABB3;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.3rem;
+  line-height: 1.6em;
+  height: 60px;
+  margin: 0;
+  position: relative;
+  text-align: center;
+  width: 95%;
+  z-index:1;
+}
+.post-loop .pagination {
+  margin: 5rem auto;
+  height: 0;
+}
+
+.content .pagination {
+  width: 100%;
+}
+.pagination a:hover {
+  text-decoration: none;
+}
+.pagination a {
+  color: #000000;
+  transition: all 0.2s ease;
+}
+
+/* Push the previous/next links out to the left/right */
+.older-posts,
+.newer-posts {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 9px 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: border 0.3s ease;
+  height: 40px;
+}
+
+.in-post .older-posts,
+.in-post .newer-posts{
+  padding-top: 0;
+  height: 48px;
+}
+
+.older-posts {
+  background: url("/blog/assets/images/arrow.jpg") no-repeat right;
+  float: right;
+  text-align: right;
+  padding-right: 120px;
+  right: 0;
+}
+
+.newer-posts {
+  background: url("/blog/assets/images/arrow-left.jpg") no-repeat left;
+  float: left;
+  text-align: left;
+  padding-left: 120px;
+  left: 0;
+}
+
+.older-posts:hover,
+.newer-posts:hover {
+  color: #889093;
+  border-color: #98a0a4;
+}
+header h1.post-title.main-title {
+  font-size: 1.9em;
+  position: absolute;
+  text-align: center;
+  top: -50px;
+  width: 80%;
+}
+header.main-header {
+  min-height: 20px;
+}
+#globe {
+  position: absolute;
+  right: 0;
+  top: -90px;
+  height:168px;
+}
+#globe-loop-post {
+  height: 53em;
+  opacity: 0.2;
+  position: fixed;
+  right: 0;
+  top: -100px;
+}
+#menu-drop {
+  display: none;
+}
+#logo {
+  width: 130%;
+}
+
+/* ==========================================================================
+   12. Media Queries - Smaller than 991px
+   ========================================================================== */
+
+@media only screen and (min-width: 991px) {
+  #site-menu {
+    display: block !important;
+  }
+  .head-loop header.main-header {
+    display: block;
+  }
+  .head-loop header.main-header-mobile {
+    display: none;
+  }
+}
+@media only screen and (max-width: 991px) {
+  #globe-loop-post {
+    display: none;
+  }
+  .head-loop header.main-header-mobile {
+    display: block;
+  }
+  main article.post.head-loop {
+    margin: 0;
+    padding: 0;
+  }
+  .head-loop header.main-header-mobile img {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  .head-loop header.main-header {
+    display: none;
+  }
+  ul.social{
+    position: relative;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+  .pagination > div {
+    padding: 0;
+  }
+  .pagination > div > div{
+    padding: 0;
+  }
+  main h4.comment{
+    margin-left: 15px;
+    padding-top: 20px;
+    width: 100%;
+  }
+  .pagination {
+    border-radius: 0;
+    height: auto;
+    margin-bottom: 0;
+    margin-left: 15px;
+  }
+  .in-post .older-posts,
+  .in-post .newer-posts,
+  .older-posts,
+  .newer-posts {
+    height: auto;
+    padding: 30px 0 10px 0;
+  }
+  .in-post .older-posts,
+  .older-posts {
+    background: url("/blog/assets/images/arrow.jpg") no-repeat top;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    text-align: center;
+  }
+  .newer-posts {
+    background: url("/blog/assets/images/arrow-left.jpg") no-repeat top;
+    border-bottom: 1px #CCC solid;
+    text-align: center;
+  }
+  a.newer-posts {
+    padding-bottom: 20px;
+  }
+  main.content {
+    margin-left: 0;
+  }
+  .post-template .post-title{
+    margin-bottom: 30px;
+    padding-top: 13px;
+  }
+  .post-content img {
+    margin-bottom: 3px;
+    width: 100% !important;
+  }
+  .posts-loop header img{
+    width: 100% !important;
+  }
+  .posts-loop header{
+    margin-left: -15px;
+    padding: 0;
+  }
+  .posts-loop{
+    margin-top: 35px;
+  }
+  .posts-loop .read-more{
+    min-height: 0;
+  }
+  .posts-loop article.post{
+    border-bottom: #EFEFEF 1px solid;
+    margin-bottom: 15px;
+    padding-bottom 15px;
+    padding-left: 15px;
+  }
+  #logo {
+    width: 100%;
+  }
+  #site-menu {
+    background-color: white;
+    border: 1px black solid;
+    padding: 0;
+    position: absolute;
+    z-index: 2;
+  }
+  li {
+    margin: 0;
+  }
+  #menu-drop {
+    background-color: transparent;
+    border-radius: 10px;
+    display: block;
+    right: 10px;
+    top: 10px;
+    position: absolute;
+    z-index: 100;
+  }
+  .navbar-fixed-top {
+    position: relative;
+  }
+  article.post {
+    margin-top: 15px;
+  }
+  .collapse {
+    display: none;
+  }
+  #globe {
+    display: none;
+  }
+  main.content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+/* ==========================================================================
+   12. Media Queries - Smaller than 900px
+   ========================================================================== */
+
+@media only screen and (max-width: 900px) {
+  .scroll-down { display: none; }
+
+  .post {
+    font-size: 0.95em
+  }
+
+  body:not(.post-template) .post-title {
+    font-size: 3.2rem;
+  }
+
+  hr {
+    margin: 2.4em 0;
+  }
+
+  ol, ul {
+    padding-left: 2em;
+  }
+
+  h1 {
+    font-size: 4.5rem;
+    text-indent: -2px;
+  }
+
+  h2 {
+    font-size: 3.6rem;
+  }
+
+  h3 {
+    font-size: 3.1rem;
+  }
+
+  h4 {
+    font-size: 2.5rem;
+  }
+
+  h5 {
+    font-size: 2.2rem;
+  }
+
+  h6 {
+    font-size: 1.8rem;
+  }
+
+  .author-meta span {
+    display: block;
+    margin: 1.5rem 0;
+  }
+}
+/* ==========================================================================
+   12. Media Queries - Smaller than 500px
+   ========================================================================== */
+@media only screen and (max-width: 500px) {
+  .nav-close {
+    position: absolute;
+    top: 18px;
+  }
+
+  .nav ul {
+    padding: 60px 9% 5%;
+  }
+
+  .inner,
+  .pagination {
+    width: auto;
+  }
+
+  .post {
+    width: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 16px;
+    margin-right: 16px;
+    padding-bottom: 2rem;
+    line-height: 1.65em;
+  }
+
+  .post-template .post-header {
+    margin-bottom: 2rem;
+  }
+
+  hr {
+    margin: 1.75em 0;
+  }
+  p, ul {
+    font-size: 0.95em;
+    margin: 0 0 2.5rem 0;
+  }
+
+  .post-excerpt p {
+    font-size: 0.85em;
+  }
+
+  h1, h2, h3,
+  h4, h5, h6 {
+    margin: 0 0 0.3em 0;
+  }
+  h1 {
+    font-size: 2.8rem;
+    letter-spacing: -1px;
+  }
+  h2 {
+    font-size: 2.4rem;
+    letter-spacing: 0;
+  }
+  h3 {
+    font-size: 2.1rem;
+  }
+  h4 {
+    font-size: 1.9rem;
+  }
+  h5 {
+    font-size: 1.8rem;
+  }
+  h6 {
+    font-size: 1.8rem;
+  }
+
+  body:not(.post-template) .post-title {
+    font-size: 2.5rem;
+  }
+
+  .post-content img {
+    padding: 0;
+    width: calc(100% + 32px); /* expand with to image + margins */
+    min-width: 0;
+    max-width: 112%; /* fallback when calc doesn't work */
+  }
+
+  .post-meta {
+    font-size: 1.3rem;
+    margin-top: 1rem;
+  }
+
+  .post-footer {
+    padding: 5rem 0 3rem 0;
+    text-align: center;
+  }
+
+  .post-footer .author {
+    margin: 0 0 2rem 0;
+    padding: 0 0 1.6rem 0;
+    border-bottom: #EBF2F6 1px dashed;
+  }
+
+  .post-footer .share {
+    position: static;
+    width: auto;
+  }
+
+  .post-footer .share a {
+    margin: 1.4rem 0.8rem 0 0.8rem;
+  }
+
+  .author-meta li {
+    float: none;
+    margin: 0;
+    line-height: 1.75em;
+  }
+
+  .author-meta li:before {
+    display: none;
+  }
+
+  .older-posts,
+  .newer-posts {
+    position: static;
+    margin: 10px 0;
+  }
+
+  .page-number {
+    display: block;
+  }
+
+  .post-footer .author-image {
+    top: -60px;
+  }
+}
+/* Used to fade in title/desc on the home page */
+@-webkit-keyframes fade-in-down {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@keyframes fade-in-down {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+/* Used to bounce .scroll-down on home page */
+@-webkit-keyframes bounce {
+  0%, 10%, 25%, 40%, 50% {
+    -webkit-transform: translateY(0) rotate(-90deg);
+        transform: translateY(0) rotate(-90deg);
+  }
+  20% {
+    -webkit-transform: translateY(-10px) rotate(-90deg);
+        transform: translateY(-10px) rotate(-90deg);
+  }
+  30% {
+    -webkit-transform: translateY(-5px) rotate(-90deg);
+        transform: translateY(-5px) rotate(-90deg);
+  }
+}
+@keyframes bounce {
+  0%, 10%, 25%, 40%, 50% {
+    -webkit-transform: translateY(0) rotate(-90deg);
+        transform: translateY(0) rotate(-90deg);
+  }
+  20% {
+    -webkit-transform: translateY(-10px) rotate(-90deg);
+        transform: translateY(-10px) rotate(-90deg);
+  }
+  30% {
+    -webkit-transform: translateY(-5px) rotate(-90deg);
+        transform: translateY(-5px) rotate(-90deg);
+  }
+}
+/* ==========================================================================
+   End of file. Animations should be the last thing here. Do not add stuff
+   below this point, or it will probably fuck everything up.
+   ========================================================================== */

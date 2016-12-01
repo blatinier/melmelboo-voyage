@@ -1,0 +1,520 @@
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%
+}
+body { margin: 0; }
+article, aside, details,
+footer, header,
+main, menu, nav,
+section, summary { display:block; }
+a { background-color: transparent;}
+a:active, a:hover { outline: 0; }
+b, strong { font-weight: bold; }
+h1 { font-size: 2em; margin: 0.67em 0; }
+img { border: 0; }
+hr { box-sizing: content-box; height: 0; }
+/* ==========================================================================
+   2. General - Setting up some base styles
+   ========================================================================== */
+html {
+  height: 100%;
+  max-height: 100%;
+  font-size: 62.5%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body {
+  height: 100%;
+  max-height: 100%;
+  font-family: "Merriweather", serif;
+  font-size: 1.8rem;
+  line-height: 1.75em;
+  color: #4A4A4A;
+  -webkit-font-feature-settings: 'kern' 1;
+  -moz-font-feature-settings: 'kern' 1;
+  -o-font-feature-settings: 'kern' 1;
+  text-rendering: geometricPrecision;
+}
+::-moz-selection {
+  background: #D6EDFF;
+}
+::selection {
+  background: #D6EDFF;
+}
+h1, h2, h3,
+h4, h5, h6 {
+  -webkit-font-feature-settings: 'dlig' 1, 'liga' 1, 'lnum' 1, 'kern' 1;
+  -moz-font-feature-settings: 'dlig' 1, 'liga' 1, 'lnum' 1, 'kern' 1;
+  -o-font-feature-settings: 'dlig' 1, 'liga' 1, 'lnum' 1, 'kern' 1;
+  color: #2E2E2E;
+  line-height: 1.15em;
+  margin: 0 0 0.4em 0;
+  font-family: "Open Sans", sans-serif;
+  text-rendering: geometricPrecision;
+}
+h1 {
+  font-size: 5rem;
+  letter-spacing: -2px;
+  text-indent: -3px;
+}
+h2 {
+  font-size: 3.6rem;
+}
+h3 {
+  font-size: 3rem;
+  letter-spacing: -0.6px;
+}
+h4 {
+  font-size: 2.5rem;
+}
+h5 {
+  font-size: 2rem;
+}
+h6 {
+  font-size: 2rem;
+}
+a {
+  color: #4A4A4A;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #111;
+}
+p, ul {
+  -webkit-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+  -moz-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+  -o-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+  margin: 0 0 1.75em 0;
+  text-rendering: geometricPrecision;
+}
+ul {
+  padding-left: 3rem;
+}
+li {
+  margin: 0.4em 0;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: #EFEFEF 1px solid;
+  margin: 3.2em 0;
+  padding: 0;
+}
+#content-home h1 {
+  font-family: "Open Sans Condensed","Helvetic",sans-serif;
+  font-size: 1.6em;
+  letter-spacing: 5px;
+  margin: 0;
+  padding: 15px 0;
+  text-transform: uppercase;
+}
+#content-home h2 {
+  text-transform: none;
+}
+article.post {
+  margin-top: 100px;
+  margin-bottom: 0;
+  width: 100%;
+}
+.post {
+  border-bottom: none;
+  margin: 4rem auto;
+  padding-bottom: 0;
+  position: relative;
+  word-wrap: break-word;
+}
+article {
+  display: block;
+}
+.post-content {
+  font-family: "Open Sans",sans-serif;
+  font-size: 0.73em;
+  font-style: normal;
+  line-height: 1.7em;
+  min-height: 75px;
+  text-align: justify;
+}
+.sub-title {
+  border-bottom: 1px solid #CCC;
+  font-family: "Open Sans Condensed",sans-serif;
+  font-size: 2em;
+  margin-bottom: 1.20em;
+  width: 100%;
+}
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+/* Wraps the main content & footer */
+.site-wrapper {
+  position: relative;
+  z-index: 10;
+  min-height: 100%;
+  background: #fff;
+  -webkit-transition: -webkit-transform 0.5s ease;
+      transition: transform 0.5s ease;
+}
+nav.nav-menu {
+  z-index:0;
+}
+.nav {
+  font-family: "Open Sans Condensed","Helvetic",sans-serif;
+  text-transform: uppercase;
+}
+.nav > li > a {
+    padding: 0 15px;
+}
+.post-content .linked-posts img {
+  border-radius: 0;
+}
+.post-content .linked-posts {
+  font-size: 1.2em;
+}
+input#submit-search {
+  background: none;
+  border: none;
+  left: 5px;
+  position: absolute;
+  top: 5px;
+  width: 50px;
+}
+input#search {
+  color: #AAA;
+  display: inline-block;
+  font-style: italic;
+  margin-left: 15px;
+  margin-top: 10px;
+  padding-left: 35px;
+  width: 50%;
+}
+ul.social {
+  position: fixed;
+  bottom: 0;
+  padding: 0;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+ul.social li {
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 5px;
+}
+ul.social img {
+  height:23px;
+  width:23px;
+}
+.current {
+  background-color: #eee;
+}
+a.sub-title {
+  margin-bottom: 0;
+  text-transform: none;
+}
+.posts-loop {
+  float: left;
+}
+body:not(.post-template) header a {
+  text-decoration: none;
+}
+
+body:not(.post-template) header time {
+  font-family: Quicksand,Arial,sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  width: 95%;
+}
+
+body:not(.post-template) header h2.post-title {
+  text-align: center;
+}
+
+header h1.post-title, header h2.post-title {
+  font-family: "Open Sans Condensed",sans-serif;
+  font-size: 1.42em;
+  font-weight: 100;
+  letter-spacing: -0.6px;
+  text-transform: uppercase;
+  width: 95%;
+}
+.post-header {
+  margin-bottom: 3.4rem;
+}
+.posts-loop .post-header img {
+  width: 95%;
+}
+
+main.content {
+  padding-right: 90px;
+}
+main.content.contact {
+  margin-top: 15px;
+  padding-left: 40px;
+  padding-right: 0;
+}
+#content-home {
+  text-align: center;
+  text-transform: uppercase;
+  padding-right: 0;
+}
+#content-home h1 {
+  font-family: "Open Sans Condensed",sans-serif;
+  font-size: 1.6em;
+  letter-spacing: 5px;
+  margin: 0;
+  padding: 15px 0;
+}
+/* Every post, on every page, gets this style on its <article> tag */
+main {
+  padding: 0 135px;
+}
+.posts-loop .post {
+  float: left;
+  margin: 0;
+}
+
+body .post-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+.post-title a {
+  text-decoration: none;
+}
+
+.post-excerpt {
+  margin-left: -15px;
+  padding: 0;
+}
+
+.post-excerpt h2 {
+  font-family: "Open Sans Condensed",sans-serif;
+}
+
+.post-excerpt a {
+  text-decoration: none;
+}
+
+.post-excerpt p {
+  color: #4A4A4A;
+  font-family: "Open Sans",Helvetica,Arial,sans-serif;
+  font-size: 0.73em;
+  font-style: normal;
+  line-height: 1.5em;
+  margin: 15px 0 0 0;
+  min-height: 60px;
+  text-align: justify;
+  width: 95%;
+}
+
+.post-excerpt p.read-more:hover {
+  color: #889093;
+}
+.post-excerpt p.read-more {
+  color: black;
+  font-family: "Open Sans",Helvetica,Arial,sans-serif;
+  text-decoration: none;
+}
+.post-content img {
+  border-radius: 10px;
+  height: auto;
+  max-width: 126%;
+  padding: 0.1em 0.1em;
+}
+.post-content a {
+  color: #aaa;
+}
+#globe {
+  height:168px;
+  position: absolute;
+  right: 0;
+  top:-90px;
+}
+#menu-drop {
+  display: none;
+}
+#logo {
+  width: 130%;
+}
+/* ==========================================================================
+   12. Media Queries - Smaller than 900px
+   ========================================================================== */
+@media only screen and (max-width: 900px) {
+  hr {
+    margin: 2.4em 0;
+  }
+  ul {
+    padding-left: 2em;
+  }
+  h1 {
+    font-size: 4.5rem;
+    text-indent: -2px;
+  }
+  h2 {
+    font-size: 3.6rem;
+  }
+  h3 {
+    font-size: 3.1rem;
+  }
+  h4 {
+    font-size: 2.5rem;
+  }
+  h5 {
+    font-size: 2.2rem;
+  }
+  h6 {
+    font-size: 1.8rem;
+  }
+}
+/* ==========================================================================
+   12. Media Queries - Smaller than 991px
+   ========================================================================== */
+
+@media only screen and (min-width: 991px) {
+  #site-menu {
+    display: block !important;
+  }
+}
+@media only screen and (max-width: 991px) {
+  ul.social{
+    position: relative;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+  #logo {
+    width: 100%;
+  }
+  #site-menu {
+    padding: 0;
+  }
+  li {
+    margin: 0;
+  }
+  #menu-drop {
+    background-color: transparent;
+    border-radius: 10px;
+    display: block;
+    right: 10px;
+    top: 10px;
+    position: absolute;
+    z-index: 100;
+  }
+  .navbar-fixed-top {
+    position: relative;
+  }
+  article.post {
+    margin-top: 15px;
+  }
+  .collapse {
+    display: none;
+  }
+  #globe {
+    display: none;
+  }
+  main.content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+/* ==========================================================================
+   12. Media Queries - Smaller than 500px
+   ========================================================================== */
+@media only screen and (max-width: 500px) {
+  hr {
+    margin: 1.75em 0;
+  }
+  p, ul {
+    font-size: 0.95em;
+    margin: 0 0 2.5rem 0;
+  }
+  h1, h2, h3,
+  h4, h5, h6 {
+    margin: 0 0 0.3em 0;
+  }
+  h1 {
+    font-size: 2.8rem;
+    letter-spacing: -1px;
+  }
+  h2 {
+    font-size: 2.4rem;
+    letter-spacing: 0;
+  }
+  h3 {
+    font-size: 2.1rem;
+  }
+  h4 {
+    font-size: 1.9rem;
+  }
+  h5 {
+    font-size: 1.8rem;
+  }
+  h6 {
+    font-size: 1.8rem;
+  }
+}
+input {
+  width: 260px;
+  padding: 6px 9px;
+  margin: 0 0 5px 0;
+  outline: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 100;
+  line-height: 1.4em;
+  background: #fff;
+  border: #e7eef2 1px solid;
+  border-radius: 4px;
+  box-shadow: none;
+  -webkit-appearance: none;
+}
+.row-images {
+  padding: 0 5px 5px 0;
+}
+table {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 1.75em 0;
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+}
+
+table th,
+table td {
+  padding: 8px;
+  line-height: 20px;
+  text-align: left;
+  vertical-align: top;
+  border-top: #EFEFEF 1px solid;
+}
+
+table th { color: #000; }
+
+table caption + thead tr:first-child th,
+table caption + thead tr:first-child td,
+table colgroup + thead tr:first-child th,
+table colgroup + thead tr:first-child td,
+table thead:first-child tr:first-child th,
+table thead:first-child tr:first-child td {
+  border-top: 0;
+}
+
+table tbody + tbody { border-top: #EFEFEF 2px solid; }
+
+table table table { background-color: #FFF; }
+
+table tbody > tr:nth-child(odd) > td,
+table tbody > tr:nth-child(odd) > th {
+  background-color: #F6F6F6;
+}
+
+table.plain tbody > tr:nth-child(odd) > td,
+table.plain tbody > tr:nth-child(odd) > th {
+   background: transparent;
+}
