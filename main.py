@@ -1,8 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 import sqlite3
-import template_remover
-from bs4 import BeautifulSoup
 from flask import render_template, request, flash
 from flask_mail import Message
 from whoosh.filedb.filestore import FileStorage
@@ -11,11 +9,11 @@ from whoosh.qparser import MultifieldParser
 import conf
 from bootstrap import application, mail
 from forms import ContactForm
+from utils.cleaner import clean_string
 
 
 def excerpt(text):
-    text = template_remover.clean(text)
-    text = BeautifulSoup(text, "html.parser").text.strip()
+    text = clean_string(text)
     return " ".join(text.split(" ")[:45])
 
 

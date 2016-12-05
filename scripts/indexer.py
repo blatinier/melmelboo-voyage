@@ -2,13 +2,12 @@ import os
 import os.path
 import shutil
 import sqlite3
-import template_remover
-from bs4 import BeautifulSoup
 from datetime import datetime
 from whoosh.index import create_in
 import whoosh.fields as fields
 
 from utils.progress import progress
+from utils.cleaner import clean_string
 
 
 class BlogIndexer:
@@ -44,10 +43,7 @@ class BlogIndexer:
         print("Index %d templates" % total_cnt)
         for page_key, page in self.statics_tpl.items():
             with open("templates/" + page['tpl_file']) as p:
-                text = p.read()
-                text = template_remover.clean(text)
-                text = BeautifulSoup(text, "html.parser").text
-                text = text.strip()
+                text = clean_string(p.read())
                 posts.append({"post_id": "static-" + page_key,
                               "title": page['title'],
                               "text": text})
@@ -65,7 +61,7 @@ class BlogIndexer:
                           "ORDER BY published_at DESC")
         posts = [{"post_id": str(post[0]),
                   "title": post[1],
-                  "text": BeautifulSoup(post[3], "html.parser").text}
+                  "text": clean_string(post[3])}
                  for post in ghost_cur.fetchall()]
         total_cnt = len(posts)
         print("Index %d posts" % total_cnt)
