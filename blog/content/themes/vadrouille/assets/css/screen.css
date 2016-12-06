@@ -221,13 +221,28 @@ nav.nav-menu {
 .nav > li > a {
     padding: 0 15px;
 }
+input {
+    width: 260px;
+    padding: 6px 9px;
+    margin: 0 0 5px 0;
+    outline: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 100;
+    line-height: 1.4em;
+    background: #fff;
+    border: #e7eef2 1px solid;
+    border-radius: 4px;
+    box-shadow: none;
+    -webkit-appearance: none;
+}
 input#submit-search {
   background: none;
   border: none;
-  left: 15px;
+  left: 5px;
   position: absolute;
-  top: 10px;
-  width: 35px;
+  top: 5px;
+  width: 50px;
 }
 input#search {
   color: #AAA;
