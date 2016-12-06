@@ -2,7 +2,6 @@ import os
 import os.path
 import shutil
 import sqlite3
-from datetime import datetime
 from whoosh.index import create_in
 import whoosh.fields as fields
 

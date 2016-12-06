@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
 import conf
 from urllib.parse import urlsplit
 from flask import Flask
@@ -10,7 +9,6 @@ application = Flask(__name__)
 application.config.from_object(conf)
 application.debug = True
 scheme, domain, _, _, _ = urlsplit(conf.PLATFORM_URL)
-#application.config['SERVER_NAME'] = domain
 application.config['PREFERRED_URL_SCHEME'] = scheme
 
 mail = Mail()

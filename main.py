@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 import sqlite3
-from flask import render_template, request, flash
+from flask import render_template, request
 from flask_mail import Message
 from whoosh.filedb.filestore import FileStorage
 from whoosh.qparser import MultifieldParser
@@ -123,7 +123,7 @@ def search(page):
                 page_key = p['post_id'].replace("static-", "")
                 page = conf.STATIC_TPL[page_key]
                 with open('templates/' + page['tpl_file'], "r") as p:
-                   page_text = p.read()
+                    page_text = p.read()
                 posts.append({'type': 'static-page',
                               'title': page['title'],
                               'excerpt': excerpt(page_text),
@@ -139,6 +139,7 @@ def create_static_view(page):
                                panel=page['active-panel'],
                                title=page['title'])
     return view
+
 
 for key, page in conf.STATIC_TPL.items():
     application.add_url_rule(page['url'],
