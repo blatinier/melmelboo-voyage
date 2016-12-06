@@ -117,6 +117,9 @@ article.post {
   margin-bottom: 0;
   width: 100%;
 }
+.post-search {
+  padding-bottom: 4rem;
+}
 .post {
   border-bottom: none;
   margin: 4rem auto;
