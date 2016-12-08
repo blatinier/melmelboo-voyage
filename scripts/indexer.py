@@ -73,4 +73,5 @@ class BlogIndexer:
             suffix = post["title"][:25]
             progress(i, total_cnt, suffix)
             self.index_document(self.index_name, post)
+        ghost.close()
         print("\nFinished indexing posts")

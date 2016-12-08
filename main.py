@@ -60,6 +60,7 @@ def camping_car_linked_posts():
               'image': i[1],
               'excerpt': excerpt(i[2]),
               'slug': i[3]} for i in ghost_cur.fetchall()]
+    ghost.close()
     return render_template('camping_car/linked_posts.html', posts=posts,
                            current="camping_car", panel="linked_posts")
 
@@ -74,6 +75,7 @@ def who_are_we_linked_posts():
                       "ORDER BY published_at DESC")
     images = [{'title': i[0],
                'image': i[1]} for i in ghost_cur.fetchall()]
+    ghost.close()
     return render_template('/who_are_we/linked_posts.html', images=images,
                            current="who_are_we",
                            panel="linked_posts")
@@ -90,6 +92,7 @@ def planning_linked_posts():
               'image': i[1],
               'excerpt': excerpt(i[2]),
               'slug': i[3]} for i in ghost_cur.fetchall()]
+    ghost.close()
     return render_template('planning/linked_posts.html', posts=posts,
                            current="preparation", panel="linked_posts")
 
@@ -117,6 +120,7 @@ def search(page):
                   'image': i[1],
                   'excerpt': excerpt(i[2]),
                   'url': "/blog/" + i[3]} for i in ghost_cur.fetchall()]
+        ghost.close()
         # Get static pages
         for p in results:
             if p['post_id'].startswith('static-'):
