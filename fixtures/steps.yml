@@ -1,0 +1,25 @@
+- go:
+    name: Je veux faire un tour du monde ! \o/
+    description: Je veux découvrir le monde, partir à l'aventure, m'ouvrir l'esprit
+    blocked_by: []
+- travel_mean:
+    name: Quel moyen de locomotion ?
+    description: Comment allez vous vous déplacer principalement ? (backpack, vélo, camping car, …)
+    blocked_by: [go]
+- who:
+    name: Avec qui (famille, combien, …)
+    description: Avec qui partez vous ? En famille ? Combien êtes vous ?
+    blocked_by: [go]
+
+#TODO
+- how_long:
+    name: Combien de temps ?
+- where:
+    name: Où ? → Itinéraire
+- money:
+    name: Budget ? (deps où & temps & qui & comment)
+- paperwork:
+    name: Papiers
+- vaccins:
+    name: Vaccins
+- Travaux ?
