@@ -1,25 +1,94 @@
 - go:
-    name: Je veux faire un tour du monde ! \o/
-    description: Je veux découvrir le monde, partir à l'aventure, m'ouvrir l'esprit
+    name: "Je veux faire un tour du monde ! \o/"
+    description: "Je veux découvrir le monde, partir à l'aventure, m'ouvrir l'esprit"
     blocked_by: []
 - travel_mean:
-    name: Quel moyen de locomotion ?
-    description: Comment allez vous vous déplacer principalement ? (backpack, vélo, camping car, …)
-    blocked_by: [go]
+    name: "Quel moyen de locomotion ?"
+    description: 'Comment allez vous vous déplacer principalement ?\n
+        - Sac à dos\n
+        - Vélo\n
+        - Camping car\n
+        - Bateau'
+    blocked_by: ["go"]
 - who:
-    name: Avec qui (famille, combien, …)
-    description: Avec qui partez vous ? En famille ? Combien êtes vous ?
-    blocked_by: [go]
+    name: "Avec qui (famille, combien, …)"
+    description: "Avec qui partez vous ? En famille ? Combien êtes vous ?"
+    blocked_by: ["go"]
+- when:
+    name: "Quand ? Combien de temps ?"
+    description: "Combien de temps partez vous ? Quand ?"
+    blocked_by: ["go"]
+    plugins: ["calendar"]
+- where:
+    name: "Où ? (Itinéraire)"
+    description: "Où partez vous ? Dans quels pays ? Dans quel ordre ? A quelles dates ?"
+    blocked_by: ["go"]
+    plugins: ["country_list_calendar", "weather_per_country"]
+    external_steps_data:
+        start_trip: "when.answer.start"
+        end_trip: "when.answer.end"
+- budget:
+    name: "Votre budget ?"
+    description: "Quel est votre budget ?"
+    blocked_by: ["where", "who", "when"]
+    plugins: ["compute_budget"]
+    external_steps_data:
+        start_trip: "when.answer.start"
+        end_trip: "when.answer.end"
+        destinations: "where.answer.destinations"
+- address_modification:
+    name: "Changement d'adresse"
+    description: "Pensez à prévenir de votre changement d'adresse si besoin"
+    plugins: ["address_modifications_to_do"]
+    blocked_by: ["when"]
+- passeport:
+    name: "Passeport"
+    description: "Avoir ses passeports faits et à jour pour toute la troupe !"
+    blocked_by: ["go"]
+- international_driver_license:
+    name: "Faire le permi international"
+    description: "Vous allez devoir avoir un permi international pour circuler partout"
+    blocked_by: ["travel_mean.motorized"]
+- carnet_passage_douane:
+    name: "Faire un carnet de passage en douane"
+    description: "Vous êtes motorisé ? Il vous faut peut-être le carnet de passage en douane."
+    plugins: ["cpd_links"]
+    blocked_by: ["travel_mean.motorized"]
+- drive_in_china:
+    name: "Conduire en Chine"
+    description: 'Conduire en Chine n''est pas possible même avec le permi international...\n
+        Plusieurs solutions: \n
+        - passer le permi chinois (en chinois) \n
+        - contourner la Chine \n
+        - Prendre un guide (et faire un convoi ou pas)'
+    blocked_by: ["where.answer.countries"]
+- china_convoy:
+    name: "Faire un convoi pour passer la Chine"
+    description: "Contacter des gens qui voyagent eux aussi en voiture/camping car/camion/moto pour faire un convoi pour passer la Chine"
+    blocked_by: ["drive_in_china.answer.convoy"]
+- vaccins:
+    name: "Vaccins"
+    description: "Quels vaccins faire ? Et les enfants ?"
+    blocked_by: ["where"]
+    plugins: ["pasteur_institute_link"]
+    external_steps_data:
+        destinations: "where.answer.destinations"
+        persons: "who.answer"
+- rv_recommanded_equipment:
+    name: "Equipement à prendre en camping car"
+    description: "Pour des conditions idéales et parer aux imprévus, il faut quelques équipements supplémentaire dans votre camping car."
+    plugins: ["rv_equipements"]
+    blocked_by: ["travel_mean.answer.rv"]
+- housing:
+    name: "Hébergement"
+    description: "Où dormir ? Couchsurfing, camping, woofing, hotel, ..."
+    blocked_by: ["travel_mean.__not__motorized"]
+- water:
+    name: "De l'eau"
+    description: "Comment et où se fournir en eau ?"
+    plugins: ["water_information"]
+    blocked_by: ["go"]
 
 #TODO
-- how_long:
-    name: Combien de temps ?
-- where:
-    name: Où ? → Itinéraire
-- money:
-    name: Budget ? (deps où & temps & qui & comment)
-- paperwork:
-    name: Papiers
-- vaccins:
-    name: Vaccins
-- Travaux ?
+#- Travaux ?
+#- information ?? hygiène ? manger local ?
