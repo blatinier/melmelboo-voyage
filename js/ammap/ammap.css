@@ -74,11 +74,16 @@
 
 .ammapDescriptionText
 {
-	overflow: auto;
+    overflow: auto;
 }
 
 
 .amChartsPlotArea
 {
 
+}
+
+tspan {
+  font-family: "Open Sans Condensed";
+  font-size: 1.4em;
 }
