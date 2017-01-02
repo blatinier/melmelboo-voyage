@@ -669,6 +669,11 @@ header.main-header {
 #logo {
   width: 130%;
 }
+.testimony {
+  background-color: #eee;
+  width: 48%;
+  padding-right:15px;
+}
 
 /* ==========================================================================
    12. Media Queries - Smaller than 991px
@@ -686,6 +691,9 @@ header.main-header {
   }
 }
 @media only screen and (max-width: 991px) {
+  article.post {
+    width: auto;
+  }
   #globe-loop-post {
     display: none;
   }
@@ -755,7 +763,7 @@ header.main-header {
     margin-bottom: 30px;
     padding-top: 13px;
   }
-  .post-content img {
+  .post-content img:not(.mobile-fixed) {
     margin-bottom: 3px;
     width: 100% !important;
   }
@@ -816,6 +824,9 @@ header.main-header {
     margin-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
+  }
+  .testimony {
+    width: 100%;
   }
 }
 /* ==========================================================================
