@@ -525,3 +525,6 @@ table.plain tbody > tr:nth-child(odd) > td,
 table.plain tbody > tr:nth-child(odd) > th {
    background: transparent;
 }
+.cursor {
+  cursor: pointer;
+}
