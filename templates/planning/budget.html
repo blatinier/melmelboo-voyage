@@ -7,21 +7,33 @@ Voici notre page budget. Autant que possible, nous tiendrons à jour les dépens
 <h2 class="sub-title">Camping-car</h2>
 <ul>
   <li>achat d'un camping-car d'occasion : <strong>11 500 €</strong></li>
-  <li>fournitures travaux avant départ (outils, bois, peinture...) : <strong>260 €</strong></li>
-  <li>fourniture décoration avant départ (tissus, accessoires...) : <strong>36 €</strong></li>
+  <li>réparation préventives (changement de pneus, filtre gasoil...): <strong>837 €</strong></li>
+  <li>fournitures travaux avant départ (outils, bois, peinture...) : <strong>801 €</strong></li>
+  <li>fourniture décoration avant départ (tissus, accessoires...) : <strong>65 €</strong></li>
   <li>réparations diverses lors du voyage : <strong>-- €</strong></li>
 </ul>
-Soit un total de <strong>11 796 €</strong> pour transformer le camping-car en fonction de nos besoins (et de nos envies aussi :) ) et le maintenir en bon état pendant le voyage. Les dépenses liées au camping-car auraient pu être nettement moins élevées si nous n'avions pas décidé de le remettre à notre goût mais... c'est notre maison maintenant et nous avions vraiment envi de nous y sentir aussi bien que possible !
+Soit un total de <strong>13 203 €</strong> pour transformer le camping-car en fonction de nos besoins (et de nos envies aussi :) ) et le maintenir en bon état pendant le voyage. Les dépenses liées au camping-car auraient pu être nettement moins élevées si nous n'avions pas décidé de le remettre à notre goût mais... c'est notre maison maintenant et nous avions vraiment envie de nous y sentir aussi bien que possible !
 <br /><br />
 
 <h2 class="sub-title">Équipement</h2>
 <ul>
-  <li>lombricomposteur : <strong>99 €</strong></li>
-  <li>antenne wifi : <strong>-- €</strong></li>
-  <li>tablette numérique : <strong>-- €</strong></li>
-  <li>liseuse x2 : <strong>offertes par nos proches</strong></li>
+  {% for item, price in [("bidons d'eau et d'essence", '54 €'),
+                         ("gourdes d'eau", '130 €'),
+                         ("steripen", '100 €'),
+                         ("2 portes bébé", '129 €'),
+                         ("tapis, chaise, moustiquaire extérieur...", '226 €'),
+                         ("serviettes, savon, dentifrice, ...", '239 €'),
+                         ("matelas et sommier", '690 €'),
+                         ("vêtements", '347 €'),
+                         ("tablette numérique avec sa protection", '203 €'),
+                         ("téléphone pour gps et internet", '450 €'),
+                         ("caméra", '380 €'),
+                         ("liseuses (x2)", 'offertes par nos proches'),
+                         ]: %}
+  <li>{{item}} : <strong>{{price}}</strong></li>
+  {% endfor %}
 </ul>
-Soit un total de <strong>99 €</strong> en équipements supplémentaires.
+Soit un total de <strong>2953 €</strong> en équipements supplémentaires.
 <br /><br />
 
 <h2 class="sub-title">Santé</h2>
@@ -34,23 +46,25 @@ Soit un total de <strong>1 489 €</strong> pour les dépenses liées à notre s
 
 <h2 class="sub-title">Administratif</h2>
 <ul>
-<li>passeport : <strong>-- €</strong></li>
+<li>passeport : <strong>34 €</strong></li>
 <li>permis international : <strong>-- €</strong></li>
 <li>visa : <strong>-- €</strong></li>
-<li>carnet de passage en douane : <strong>-- €</strong></li>
+<li>carnet de passage en douane : <strong>47 + -- €</strong></li>
+<li>assurance voyage pour 1 an pour 4 : <strong>1 536 €</strong></li>
 </ul>
 
-Soit un total de <strong>-- €</strong> pour les dépenses liées à l'administration.
+Soit un total de <strong>1 617 €</strong> pour les dépenses liées à l'administration.
 <br /><br />
 
 <h2 class="sub-title">Vie quotidienne</h2>
 <ul>
+<li>gaz : <strong>30 €</strong></li>
 <li>essence : <strong>-- €</strong></li>
 <li>nourriture : <strong>-- €</strong></li>
 <li>loisirs : <strong>-- €</strong></li>
 <li>divers (vêtements, souvenirs...) : <strong>-- €</strong></li>
 </ul>
-Soit un total de <strong>-- €</strong> pour les dépenses liées à notre vie quotidienne.
+Soit un total de <strong>30 €</strong> pour les dépenses liées à notre vie quotidienne.
 <br /><br />
 
 <h4 class="comment">Commenter cet article</h4>
