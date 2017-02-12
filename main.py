@@ -114,7 +114,8 @@ def search(page):
         ghost = sqlite3.connect(conf.BLOG_VOYAGE_DB)
         ghost_cur = ghost.cursor()
         ghost_cur.execute("SELECT title, image, html, slug "
-                          "FROM posts WHERE id IN (%s)" % post_ids)
+                          "FROM posts WHERE id IN (%s) "
+                          "ORDER BY published_at DESC" % post_ids)
         posts = [{'type': "post",
                   'title': i[0],
                   'image': i[1],
