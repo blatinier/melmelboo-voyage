@@ -168,8 +168,11 @@ nav.nav-menu {
   font-family: "Open Sans Condensed","Helvetic",sans-serif;
   text-transform: uppercase;
 }
-.nav > li > a {
+.nav > li > a, .nav > li > .dropdown {
     padding: 0 15px;
+}
+.nav > li > .dropdown:hover {
+    background-color: #eee;
 }
 .post-content .linked-posts img {
   border-radius: 0;

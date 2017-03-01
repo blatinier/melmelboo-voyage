@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="content col-lg-9">
+<article class="post page">
+  <header class="post-header">
+    <h1 class="post-title">Notre périple autour du monde</h1>
+  </header>
+  <section class="post-content">
+    <img src="/images/globe1.jpg" id="globe" alt="globe" />
+    <ul class="nav nav-tabs" role="tablist">
+      <li {%- if panel == "itinerary" %} class="active" {%- endif %}>
+        <a class="sub-title" href="{{ url_for('itinerary') }}">Où sommes-nous ?</a>
+      </li>
+      <li {%- if panel == "visited_countries" %} class="active" {%- endif %}>
+        <a class="sub-title" href="{{ url_for('visited_countries') }}">Pays visités</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active">
+          {% block panel %}{% endblock %}
+      </div>
+    </div>
+  </section>
+</article>
+</main>
+{% endblock %}
