@@ -1,6 +1,11 @@
 PLATFORM_URL = 'http://www.melmelboo-voyage.fr'
 SECRET_KEY = 'test'
 
+GEONAMES_WS = "http://ws.geonames.org/findNearbyPlaceNameJSON"
+GEONAMES_USER = "pipo"
+GEONAMES_PWD = "pipo"
+CURRENT_POS_FILE = "/tmp/current_voyage_position"
+
 MAIL_SENDER_ADDR = 'my@email.com'
 MAIL_SENDER_MDP = 'test'
 

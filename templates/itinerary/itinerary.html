@@ -20,12 +20,12 @@ var map = AmCharts.makeChart("mapdiv", {
       imageURL: "/images/icon-rv.png",
       height: 20,
       width: 40,
-      label: "Nous sommes en France !",
+      label: "Nous sommes {{ country }} !",
       labelRollOverColor: "#000",
       labelPosition: "bottom",
       scale: 0.5,
-      latitude: 48.8567,
-      longitude: 2.3510,
+      latitude: {{ latitude }},
+      longitude: {{ longitude }},
       color: "#000"
     }]
   }

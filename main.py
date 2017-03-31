@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+import json
+import requests
 import sqlite3
-from flask import render_template, request
+from flask import render_template, request, jsonify, redirect
 from flask_mail import Message
 from whoosh.filedb.filestore import FileStorage
 from whoosh.qparser import MultifieldParser
@@ -10,6 +12,7 @@ import conf
 from bootstrap import application, mail
 from forms import ContactForm
 from utils.cleaner import clean_string
+from utils.country_names import countries
 
 
 def excerpt(text):
@@ -21,6 +24,10 @@ def excerpt(text):
 def home():
     return render_template('index.html')
 
+
+@application.route("/blog")
+def redir_blog():
+    return redirect("/blog/")
 
 @application.route("/contact", methods=['GET', 'POST'])
 def contact():
@@ -81,6 +88,25 @@ def who_are_we_linked_posts():
                            panel="linked_posts")
 
 
+@application.route("/gps/pipopipo")
+def update_coords_by_btn():
+    return render_template("/itinerary/update_gps.html")
+
+@application.route("/gps/<latitude>/<longitude>")
+def update_coords(latitude, longitude):
+    dic = {"latitude": latitude,
+           "longitude": longitude}
+    url_ws = "%s?lat=%s&lng=%s&username=%s&password=%s" % \
+                (conf.GEONAMES_WS,
+                 latitude, longitude,
+                 conf.GEONAMES_USER,
+                 conf.GEONAMES_PWD)
+    res = requests.get(url_ws).json()
+    dic["country"] = countries[res["geonames"][0]['countryName']]
+    with open(conf.CURRENT_POS_FILE, "w+") as fh:
+        json.dump(dic, fh)
+    return jsonify({'message':'You got served!'})
+
 @application.route("/preparation/related")
 def planning_linked_posts():
     ghost = sqlite3.connect(conf.BLOG_VOYAGE_DB)
@@ -139,10 +165,18 @@ def search(page):
 
 def create_static_view(page):
     def view():
+        with open(conf.CURRENT_POS_FILE) as pos_file:
+            content = json.load(pos_file)
+            pos_lat = content["latitude"]
+            pos_long = content["longitude"]
+            country = content.get("country")
         return render_template(page['tpl_file'],
                                current=page['active-menu'],
                                panel=page['active-panel'],
-                               title=page['title'])
+                               title=page['title'],
+                               latitude=pos_lat,
+                               longitude=pos_long,
+                               country=country)
     return view
 
 
