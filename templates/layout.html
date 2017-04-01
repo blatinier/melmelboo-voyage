@@ -213,7 +213,7 @@
     <script type="text/javascript">
         Shadowbox.init({displayCounter: false, displayNav: true});
         $(function(){
-            $(".post-content img").not("#globe").not("#globe-loop-post").each(function(index){
+            $(".post-content img").not("#globe").not("#globe-loop-post").not(".excluded_shadowbox").each(function(index){
                 $(this).wrap('<a href="'+$(this).attr("src")+'" rel="shadowbox[Gallerie]" />');
             });
         });

@@ -1,0 +1,37 @@
+{% extends "itinerary/layout.html" %}
+{% block panel %}
+<br/>
+<br/>
+<div class="linked-posts">
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <img src="/img/articles/Bilan_{{ country|capitalize }}.png"
+         alt="{{ country }}"
+         title="Bilan {{ country }}"
+         class="col-lg-10" />
+    <div class="col-lg-1"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="sub-title">Articles liés</h2>
+    </div>
+  </div>
+{% for post in posts %}
+  <article class="row post-search">
+    <header class="col-lg-4">
+      <a href="/blog/{{post.slug}}">
+        <img style="width:92%;" alt="{{post.title}}" src="{{post.image}}" />
+      </a>
+    </header>
+    <section class="post-excerpt col-lg-8">
+      <a href="/blog/{{post.slug}}">
+        <h2 class="post-title">{{post.title}}</h2>
+        <p>{{post.excerpt}}...</p>
+        <p class="read-more">Lire la suite →</p>
+      </a>
+    </section>
+  </article>
+{% endfor %}
+</div>
+{% endblock %}
+

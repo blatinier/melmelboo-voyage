@@ -62,6 +62,7 @@ def camping_car_linked_posts():
     ghost_cur = ghost.cursor()
     ghost_cur.execute("SELECT title, image, html, slug FROM posts WHERE id IN "
                       "(SELECT post_id FROM posts_tags WHERE tag_id=1) "
+                      "AND published_at < DATE('now') "
                       "ORDER BY published_at DESC")
     posts = [{'title': i[0],
               'image': i[1],
@@ -78,7 +79,8 @@ def who_are_we_linked_posts():
     ghost_cur = ghost.cursor()
     ghost_cur.execute("SELECT title, image FROM posts WHERE id IN "
                       "(SELECT post_id FROM posts_tags WHERE tag_id=36) "
-                      "AND strftime('%Y', published_at)='2016'"
+                      "AND strftime('%Y', published_at)='2016' "
+                      "AND published_at < DATE('now') "
                       "ORDER BY published_at DESC")
     images = [{'title': i[0],
                'image': i[1]} for i in ghost_cur.fetchall()]
@@ -107,12 +109,33 @@ def update_coords(latitude, longitude):
         json.dump(dic, fh)
     return jsonify({'message':'You got served!'})
 
+@application.route("/itinerary/related/<country>")
+def itinerary_linked_posts(country):
+    ghost = sqlite3.connect(conf.BLOG_VOYAGE_DB)
+    ghost_cur = ghost.cursor()
+    ghost_cur.execute("SELECT title, image, html, slug FROM posts WHERE id IN "
+                      "(SELECT post_id FROM posts_tags "
+                      " LEFT JOIN tags ON posts_tags.tag_id=tags.id "
+                      " WHERE tags.name=?) "
+                      "AND published_at < DATE('now') "
+                      "ORDER BY published_at DESC", (country, ))
+    posts = [{'title': i[0],
+              'image': i[1],
+              'excerpt': excerpt(i[2]),
+              'slug': i[3]} for i in ghost_cur.fetchall()]
+    ghost.close()
+    return render_template('itinerary/linked_posts.html', posts=posts,
+                           current="itineraire",
+                           panel="visited_countries",
+                           country=country)
+
 @application.route("/preparation/related")
 def planning_linked_posts():
     ghost = sqlite3.connect(conf.BLOG_VOYAGE_DB)
     ghost_cur = ghost.cursor()
     ghost_cur.execute("SELECT title, image, html, slug FROM posts WHERE id IN "
                       "(SELECT post_id FROM posts_tags WHERE tag_id=8) "
+                      "AND published_at < DATE('now') "
                       "ORDER BY published_at DESC")
     posts = [{'title': i[0],
               'image': i[1],

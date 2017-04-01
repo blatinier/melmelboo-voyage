@@ -75,6 +75,13 @@
           $(this).addClass('current');
       }
     });
+
+    $(function() {
+      $(".dropdown").hover(
+        function(){ $(this).addClass('open') },
+        function(){ $(this).removeClass('open') }
+      );
+    });
     </script>
     <script type="text/javascript" src="{{asset "js/index.js"}}"></script>
     <script type="text/javascript" src="/js/search.js"></script>
