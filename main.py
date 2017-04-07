@@ -3,6 +3,7 @@
 import json
 import requests
 import sqlite3
+from datetime import datetime, timedelta
 from flask import render_template, request, jsonify, redirect
 from flask_mail import Message
 from whoosh.filedb.filestore import FileStorage
@@ -105,8 +106,18 @@ def update_coords(latitude, longitude):
                  conf.GEONAMES_PWD)
     res = requests.get(url_ws).json()
     dic["country"] = countries[res["geonames"][0]['countryName']]
+    with open(conf.CURRENT_POS_FILE) as pos_file:
+        content = json.load(pos_file)
+        to_hist = {"latitude": content["latitude"],
+                   "longitude": content["longitude"],
+                   "country": content["country"]}
+    if "hist" in content:
+        content["hist"].append(to_hist)
+    else:
+        content["hist"] = [to_hist]
+    content.update(dic)
     with open(conf.CURRENT_POS_FILE, "w+") as fh:
-        json.dump(dic, fh)
+        json.dump(content, fh)
     return jsonify({'message':'You got served!'})
 
 @application.route("/itinerary/related/<country>")
@@ -117,7 +128,7 @@ def itinerary_linked_posts(country):
                       "(SELECT post_id FROM posts_tags "
                       " LEFT JOIN tags ON posts_tags.tag_id=tags.id "
                       " WHERE tags.name=?) "
-                      "AND published_at < DATE('now') "
+                      "AND published_at < DATETIME('now') "
                       "ORDER BY published_at DESC", (country, ))
     posts = [{'title': i[0],
               'image': i[1],
@@ -188,6 +199,8 @@ def search(page):
 
 def create_static_view(page):
     def view():
+        departure_day = datetime(2017, 3, 4)
+        days_past_since_departure = (datetime.today() - departure_day).days
         with open(conf.CURRENT_POS_FILE) as pos_file:
             content = json.load(pos_file)
             pos_lat = content["latitude"]
@@ -199,7 +212,9 @@ def create_static_view(page):
                                title=page['title'],
                                latitude=pos_lat,
                                longitude=pos_long,
-                               country=country)
+                               country=country,
+                               days_past_since_departure=days_past_since_departure,
+                               departure_day=departure_day)
     return view
 
 

@@ -4,72 +4,140 @@
 Voici notre page budget. Autant que possible, nous tiendrons à jour les dépenses liées à la préparation du voyage et au voyage lui-même afin d'y voir clair dans nos comptes mais aussi afin de permettre à de futurs voyageurs de se projeter dans leur financement.
 <br /><br />
 
+{% set achats = {"vie_quotidienne": {"gaz": 30,
+                                     "essence": 465,
+                                     "parking": 14,
+                                     "nourriture, restaurants": 673,
+                                     "téléphone, internet": 18,
+                                     "loisirs": 106,
+                                     "divers (vêtements, souvenirs, couches, soins...)": 52},
+                 "camping_car": {"achat d'un camping-car d'occasion": 11500,
+                                 "réparation préventives (changement de pneus, filtre gasoil...)": 837,
+                                 "pièces de rechange(filtres, courroies...)": 637,
+                                 "fournitures travaux avant départ (outils, bois, peinture...)": 865,
+                                 "fourniture décoration avant départ (tissus, accessoires...)": 65,
+                                 "nouvelle batterie + convertisseur 12V/220V": 2957,
+                                 "logos sur la carrosserie": 246,
+                                 "réparations diverses lors du voyage": 0},
+                 "equipement": {"bidons d'eau et d'essence": 54,
+                                "gourdes d'eau": 130,
+                                "steripen": 100,
+                                "2 portes bébé": 129,
+                                "tapis, chaise, moustiquaire extérieur, ...": 226,
+                                "serviettes, savon, dentifrice, ...": 239,
+                                "matelas et sommier": 690,
+                                "vêtements": 347,
+                                "tablette numérique avec sa protection": 203,
+                                "téléphone pour gps et internet": 450,
+                                "caméra": 380,
+                                "vélos, sièges pour les enfants, antivol": 210,
+                                "siège auto pour Gaspard": 30,
+                                "cables de démarrage, cable de traction, ...": 64,
+                                "liseuses (x2)": 0},
+                 "sante": {"vaccination": 1489,
+                           "trousse à pharmacie": 20},
+                 "administratif": {"passeport": 34,
+                                   "permis international": 0,
+                                   "visa": 0,
+                                   "carnet de passage en douane": 203,
+                                   "refaire la carte grise perdue": 60,
+                                   "assurance voyage pour 1 an pour 4": 1536} } %}
+{% set post_price = {"liseuses (x2)": "(offertes par nos proches)",
+                     "carnet de passage en douane": "(47 pour l'adhésion à l'ACA et 156 pour le CPD en soit)",
+                     "refaire la carte grise perdue": "(puis la retrouver 1 heure après être sorti de la préfecture... bouleeeets !)"} %}
+{% set total_cost = achats["camping_car"].values()|sum +
+                    achats["equipement"].values()|sum +
+                    achats["sante"].values()|sum +
+                    achats["administratif"].values()|sum +
+                    achats["vie_quotidienne"].values()|sum %}
 <h2 class="sub-title">Camping-car</h2>
 <ul>
-  <li>achat d'un camping-car d'occasion : <strong>11 500 €</strong></li>
-  <li>réparation préventives (changement de pneus, filtre gasoil...): <strong>837 €</strong></li>
-  <li>pièces de rechange(filtres, courroies...): <strong>637 €</strong></li>
-  <li>fournitures travaux avant départ (outils, bois, peinture...) : <strong>801 €</strong></li>
-  <li>fourniture décoration avant départ (tissus, accessoires...) : <strong>65 €</strong></li>
-  <li>nouvelle batterie + convertisseur 12V/220V : <strong>2 957 €</strong></li>
-  <li>logos sur la carrosserie : <strong>246 €</strong></li>
-  <li>refaire la carte grise perdues: <strong>60 €</strong> (puis la retrouver 1 heure après être sortis de la préfecture... bouleeeets !)</li>
-  <li>réparations diverses lors du voyage : <strong>-- €</strong></li>
-</ul>
-Soit un total de <strong>17 103 €</strong> pour transformer le camping-car en fonction de nos besoins (et de nos envies aussi :) ) et le maintenir en bon état pendant le voyage. Les dépenses liées au camping-car auraient pu être nettement moins élevées si nous n'avions pas décidé de le remettre à notre goût mais... c'est notre maison maintenant et nous avions vraiment envie de nous y sentir aussi bien que possible !
-<br /><br />
-
-<h2 class="sub-title">Équipement</h2>
-<ul>
-  {% for item, price in [("bidons d'eau et d'essence", '54 €'),
-                         ("gourdes d'eau", '130 €'),
-                         ("steripen", '100 €'),
-                         ("2 portes bébé", '129 €'),
-                         ("tapis, chaise, moustiquaire extérieur...", '226 €'),
-                         ("serviettes, savon, dentifrice, ...", '239 €'),
-                         ("matelas et sommier", '690 €'),
-                         ("vêtements", '347 €'),
-                         ("tablette numérique avec sa protection", '203 €'),
-                         ("téléphone pour gps et internet", '450 €'),
-                         ("caméra", '380 €'),
-                         ("liseuses (x2)", 'offertes par nos proches'),
-                         ]: %}
-  <li>{{item}} : <strong>{{price}}</strong></li>
+  {% for item, price in achats["camping_car"].items(): %}
+    <li>{{item}} :
+      <strong>
+        {{"{0:,}".format(price).replace(",", " ")}}
+        € {% if post_price.get(item) %}{{post_price.get(item)}}{% endif %}
+      </strong>
+    </li>
   {% endfor %}
 </ul>
-Soit un total de <strong>2953 €</strong> en équipements supplémentaires.
+Soit un total de
+<strong>{{"{0:,}".format(achats["camping_car"].values()|sum).replace(",", " ")}} €</strong>
+pour transformer le camping-car en fonction de nos besoins (et de nos envies aussi :) ) et le maintenir en bon état pendant le voyage. Les dépenses liées au camping-car auraient pu être nettement moins élevées si nous n'avions pas décidé de le remettre à notre goût mais... c'est notre maison maintenant et nous avions vraiment envie de nous y sentir aussi bien que possible !
+<br /><br />
+<h2 class="sub-title">Équipement</h2>
+<ul>
+  {% for item, price in achats["equipement"].items(): %}
+    <li>{{item}} :
+      <strong>
+        {{"{0:,}".format(price).replace(",", " ")}}
+        € {% if post_price.get(item) %}{{post_price.get(item)}}{% endif %}
+      </strong>
+    </li>
+  {% endfor %}
+</ul>
+Soit un total de
+<strong>{{"{0:,}".format(achats["equipement"].values()|sum).replace(",", " ")}} €</strong>
+en équipements supplémentaires.
 <br /><br />
 
 <h2 class="sub-title">Santé</h2>
 <ul>
-  <li>vaccination : <strong>1 489 €</strong></li>
-  <li>trousse à pharmacie : <strong>-- €</strong></li>
+  {% for item, price in achats["sante"].items(): %}
+    <li>{{item}} :
+      <strong>
+        {{"{0:,}".format(price).replace(",", " ")}}
+        € {% if post_price.get(item) %}{{post_price.get(item)}}{% endif %}
+      </strong>
+    </li>
+  {% endfor %}
 </ul>
-Soit un total de <strong>1 489 €</strong> pour les dépenses liées à notre santé.
+Soit un total de
+<strong>{{"{0:,}".format(achats["sante"].values()|sum).replace(",", " ")}} €</strong>
+pour les dépenses liées à notre santé.
 <br /><br />
 
 <h2 class="sub-title">Administratif</h2>
 <ul>
-<li>passeport : <strong>34 €</strong></li>
-<li>permis international : <strong>-- €</strong></li>
-<li>visa : <strong>-- €</strong></li>
-<li>carnet de passage en douane : <strong>47 + -- €</strong></li>
-<li>assurance voyage pour 1 an pour 4 : <strong>1 536 €</strong></li>
+  {% for item, price in achats["administratif"].items(): %}
+    <li>{{item}} :
+      <strong>
+        {{"{0:,}".format(price).replace(",", " ")}}
+        € {% if post_price.get(item) %}{{post_price.get(item)}}{% endif %}
+      </strong>
+    </li>
+  {% endfor %}
 </ul>
 
-Soit un total de <strong>1 617 €</strong> pour les dépenses liées à l'administration.
+Soit un total de
+<strong>{{"{0:,}".format(achats["administratif"].values()|sum).replace(",", " ")}} €</strong>
+pour les dépenses liées à l'administration.
+Ce n'est pas dans le budget à proprement parler, mais le Carnet de Passage en Douane nécessite une caution de une fois et demi la valeur du véhicule à l'argus (~10 000 € pour nous) qui nous sera restitué une fois le véhicule de retour en France.
 <br /><br />
 
 <h2 class="sub-title">Vie quotidienne</h2>
 <ul>
-<li>gaz : <strong>30 €</strong></li>
-<li>essence : <strong>-- €</strong></li>
-<li>nourriture : <strong>-- €</strong></li>
-<li>loisirs : <strong>-- €</strong></li>
-<li>divers (vêtements, souvenirs...) : <strong>-- €</strong></li>
+  {% for item, price in achats["vie_quotidienne"].items(): %}
+    <li>{{item}} :
+      <strong>
+        {{"{0:,}".format(price).replace(",", " ")}}
+        € {% if post_price.get(item) %}{{post_price.get(item)}}{% endif %}
+      </strong>
+    </li>
+  {% endfor %}
 </ul>
-Soit un total de <strong>30 €</strong> pour les dépenses liées à notre vie quotidienne.
+Soit un total de
+<strong>{{"{0:,}".format(achats["vie_quotidienne"].values()|sum).replace(",", " ")}} €</strong>
+pour les dépenses liées à notre vie quotidienne.
 <br /><br />
+
+<h2 class="sub-title">Bilan</h2>
+Avec tout ça, nous sommes partis
+depuis {{ days_past_since_departure }} jours et avons dépensé au total
+<strong>{{"{0:,}".format(total_cost).replace(",", " ")}} €</strong>,
+soit <strong>{{ "{0:,}".format((total_cost / days_past_since_departure)|round).replace(",", " ")|int }} € par jours</strong>.<br />
+Ce total est trompeur au début car le prix des préparatifs est inclus dedans, ça sera lissé au fur et à mesure que les jours passerons.
+<br/><br/>
 
 <h4 class="comment">Commenter cet article</h4>
 <section id="isso-thread"

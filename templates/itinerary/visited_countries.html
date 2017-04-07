@@ -8,22 +8,18 @@ Vous trouverez ici la liste des pays que nous avons déjà visités au cours de 
 <h2 class="sub-title">Europe</h2>
 
 <div class="linked-posts">
-  <a href="/itinerary/related/france">
+{% for c1, c2, c3 in [('france', 'France', '2017/FRANCE.JPG'),
+                      ('italie', 'Italie', '2017/ITALIE.JPG'),
+                      ('slovenie', 'Slovénie', '2017/SLOVENIE.JPG')] %}
+  <a href="/itinerary/related/{{c1}}">
     <div class="col-lg-4">
       <img style="width: 100%"
-           src="/img/articles/2017/FRANCE.JPG"
-           alt="France" title="France"
+           src="/img/articles/{{c3}}"
+           alt="{{c2}}" title="{{c2}}"
            class="excluded_shadowbox" />
     </div>
   </a>
-  <a href="/itinerary/related/italie">
-    <div class="col-lg-4">
-      <img style="width: 100%"
-           src="/img/articles/2017/ITALIE.JPG"
-           alt="Italie" title="Italie"
-           class="excluded_shadowbox" />
-    </div>
-  </a>
+{% endfor %}
 </div>
 <div class="clearfix"></div>
 {% endblock %}
