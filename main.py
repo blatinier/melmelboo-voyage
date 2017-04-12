@@ -3,6 +3,7 @@
 import json
 import requests
 import sqlite3
+from collections import defaultdict
 from datetime import datetime, timedelta
 from flask import render_template, request, jsonify, redirect
 from flask_mail import Message
@@ -89,6 +90,21 @@ def who_are_we_linked_posts():
     return render_template('/who_are_we/linked_posts.html', images=images,
                            current="who_are_we",
                            panel="linked_posts")
+
+
+@application.route("/gps/maps")
+def gen_maps():
+    with open(conf.CURRENT_POS_FILE) as pos_file:
+        content = json.load(pos_file)
+    rev_countries = {v: k for k, v in countries.items()}
+    points_by_country = defaultdict(list)
+    for point in content['hist']:
+        country = rev_countries[point['country']]
+        map_name = country.replace(" ", "")
+        map_name = map_name[0].lower() + map_name[1:]
+        points_by_country[map_name].append(point)
+    return render_template("/itinerary/maps.html",
+                           maps=points_by_country)
 
 
 @application.route("/gps/pipopipo")

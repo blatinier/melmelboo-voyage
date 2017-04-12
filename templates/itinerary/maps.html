@@ -1,0 +1,48 @@
+{% extends "itinerary/layout.html" %}
+{% block panel %}
+<script src="//www.melmelboo-voyage.fr/js/ammap/ammap.js"></script>
+{% for cmap, points in maps.items() %}
+<script type="text/javascript" src="/js/ammap/maps/js/{{cmap}}Low.js"></script>
+TODO include javascript controls (add/rm dot, add/rm coords, switch arcs sign)
+<script>var map=AmCharts.makeChart("{{cmap}}_map",
+  {
+    type:"map",
+    projection:"eckert3",
+    areasSettings:
+    {
+      unlistedAreasColor:"#EEE"
+    },
+    zoomDuration:0,
+    zoomControl:{zoomControlEnabled: false},
+    fontFamily: "Open Sans Condensed",
+    dataProvider:{
+      map:"{{cmap}}Low",
+      lines: [
+        {
+          latitudes: [{#",".join([p['latitude'] for p in points])#}]
+          longitudes: [{#",".join([p['longitude'] for p in points])#}]
+        }
+      ],
+      images: [
+      {% for p in points %}
+        {
+          type: "circle",
+          latitude: {{ p['latitude'] }},
+          longitude: {{ p['longitude'] }},
+          width: 5
+          // , label: "Ljubljana", labelPosition: "top", labelFontSize:14
+        },
+      {% endfor %}
+      ]
+    },
+    linesSettings: {
+      arc: -0.7, // this makes lines curved. Use value from -1 to 1
+      color: "#000000",
+      thickness: 0.5
+    }
+  }
+);</script>
+<div id="{{cmap}}_map" style="width: 100%; background-color:#FFF; height: 500px;"></div>
+{% endfor %}
+{% endblock %}
+
