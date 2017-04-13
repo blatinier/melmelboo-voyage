@@ -19,8 +19,8 @@ TODO include javascript controls (add/rm dot, add/rm coords, switch arcs sign)
       map:"{{cmap}}Low",
       lines: [
         {
-          latitudes: [{#",".join([p['latitude'] for p in points])#}]
-          longitudes: [{#",".join([p['longitude'] for p in points])#}]
+          latitudes: [{{",".join(latitudes[cmap])}}],
+          longitudes: [{{",".join(longitudes[cmap])}}]
         }
       ],
       images: [

@@ -98,13 +98,19 @@ def gen_maps():
         content = json.load(pos_file)
     rev_countries = {v: k for k, v in countries.items()}
     points_by_country = defaultdict(list)
+    latitudes_by_country = defaultdict(list)
+    longitudes_by_country = defaultdict(list)
     for point in content['hist']:
         country = rev_countries[point['country']]
         map_name = country.replace(" ", "")
         map_name = map_name[0].lower() + map_name[1:]
         points_by_country[map_name].append(point)
+        latitudes_by_country[map_name].append(point['latitude'])
+        longitudes_by_country[map_name].append(point['longitude'])
     return render_template("/itinerary/maps.html",
-                           maps=points_by_country)
+                           maps=points_by_country,
+                           latitudes=latitudes_by_country,
+                           longitudes=longitudes_by_country)
 
 
 @application.route("/gps/pipopipo")
