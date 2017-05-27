@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 import json
+import os.path
 import requests
 import sqlite3
 from collections import defaultdict
@@ -100,22 +101,46 @@ def gen_maps():
     points_by_country = defaultdict(list)
     latitudes_by_country = defaultdict(list)
     longitudes_by_country = defaultdict(list)
+    ordered_countries = []
     for point in content['hist']:
         country = rev_countries[point['country']]
         map_name = country.replace(" ", "")
         map_name = map_name[0].lower() + map_name[1:]
+        if map_name not in ordered_countries:
+            ordered_countries.append(map_name)
         points_by_country[map_name].append(point)
         latitudes_by_country[map_name].append(point['latitude'])
         longitudes_by_country[map_name].append(point['longitude'])
+    ordered_countries = ordered_countries[::-1]
     return render_template("/itinerary/maps.html",
                            maps=points_by_country,
+                           countries=ordered_countries,
                            latitudes=latitudes_by_country,
                            longitudes=longitudes_by_country)
+
+
+@application.route("/accounting/add", methods=["GET", "POST"])
+def accounting():
+    last_action = ""
+    with open(conf.ACCOUNTING_FILE) as acc_file:
+        achats = json.load(acc_file)
+    if request.method == "POST":
+        cat, scat = request.form['spending_type'].split(" -- ")
+        amount = int(request.form['amount'])
+        if amount and cat in achats and scat in achats[cat]:
+            achats[cat][scat] += amount
+            with open(conf.ACCOUNTING_FILE, "w+") as acc_file:
+                json.dump(achats, acc_file)
+                last_action = "Added %s to %s -- %s" % (amount, cat, scat)
+    return render_template("/planning/accounting.html",
+                           achats=achats,
+                           last_action=last_action)
 
 
 @application.route("/gps/pipopipo")
 def update_coords_by_btn():
     return render_template("/itinerary/update_gps.html")
+
 
 @application.route("/gps/<latitude>/<longitude>")
 def update_coords(latitude, longitude):
@@ -157,10 +182,12 @@ def itinerary_linked_posts(country):
               'excerpt': excerpt(i[2]),
               'slug': i[3]} for i in ghost_cur.fetchall()]
     ghost.close()
+    has_top_img = os.path.isfile("img/articles/Bilan_%s.png" % country.capitalize())
     return render_template('itinerary/linked_posts.html', posts=posts,
                            current="itineraire",
                            panel="visited_countries",
-                           country=country)
+                           country=country,
+                           has_top_img=has_top_img)
 
 @application.route("/preparation/related")
 def planning_linked_posts():
@@ -223,18 +250,23 @@ def create_static_view(page):
     def view():
         departure_day = datetime(2017, 3, 4)
         days_past_since_departure = (datetime.today() - departure_day).days
+        with open(conf.ACCOUNTING_FILE) as acc_file:
+            achats = json.load(acc_file)
         with open(conf.CURRENT_POS_FILE) as pos_file:
             content = json.load(pos_file)
             pos_lat = content["latitude"]
             pos_long = content["longitude"]
             country = content.get("country")
+            points_hist = content["hist"]
         return render_template(page['tpl_file'],
                                current=page['active-menu'],
                                panel=page['active-panel'],
                                title=page['title'],
                                latitude=pos_lat,
                                longitude=pos_long,
+                               points_hist= points_hist,
                                country=country,
+                               achats=achats,
                                days_past_since_departure=days_past_since_departure,
                                departure_day=departure_day)
     return view

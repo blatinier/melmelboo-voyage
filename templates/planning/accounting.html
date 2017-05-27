@@ -1,0 +1,18 @@
+{% extends "planning/layout.html" %}
+{% block panel %}
+<form method="post">
+  <div class="col-lg-2">Spending type: </div>
+  <select class="col-lg-10" name="spending_type">
+    {% for cat in achats %}
+      {% for scat in achats[cat] %}
+        <option value="{{ cat }} -- {{ scat }}">
+          {{ cat }} -- {{ scat }}
+        </option>
+      {% endfor %}
+    {% endfor %}
+  </select><br />
+  Amount: <input type="text" name="amount" /><br />
+  <input type="submit" value="Update" />
+</form>
+{{ last_action }}
+{% endblock %}

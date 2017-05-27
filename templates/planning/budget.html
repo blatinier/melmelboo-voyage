@@ -4,44 +4,6 @@
 Voici notre page budget. Autant que possible, nous tiendrons à jour les dépenses liées à la préparation du voyage et au voyage lui-même afin d'y voir clair dans nos comptes mais aussi afin de permettre à de futurs voyageurs de se projeter dans leur financement.
 <br /><br />
 
-{% set achats = {"vie_quotidienne": {"gaz": 30,
-                                     "essence": 465,
-                                     "parking": 14,
-                                     "nourriture, restaurants": 673,
-                                     "téléphone, internet": 18,
-                                     "loisirs": 106,
-                                     "divers (vêtements, souvenirs, couches, soins...)": 52},
-                 "camping_car": {"achat d'un camping-car d'occasion": 11500,
-                                 "réparation préventives (changement de pneus, filtre gasoil...)": 837,
-                                 "pièces de rechange(filtres, courroies...)": 637,
-                                 "fournitures travaux avant départ (outils, bois, peinture...)": 865,
-                                 "fourniture décoration avant départ (tissus, accessoires...)": 65,
-                                 "nouvelle batterie + convertisseur 12V/220V": 2957,
-                                 "logos sur la carrosserie": 246,
-                                 "réparations diverses lors du voyage": 0},
-                 "equipement": {"bidons d'eau et d'essence": 54,
-                                "gourdes d'eau": 130,
-                                "steripen": 100,
-                                "2 portes bébé": 129,
-                                "tapis, chaise, moustiquaire extérieur, ...": 226,
-                                "serviettes, savon, dentifrice, ...": 239,
-                                "matelas et sommier": 690,
-                                "vêtements": 347,
-                                "tablette numérique avec sa protection": 203,
-                                "téléphone pour gps et internet": 450,
-                                "caméra": 380,
-                                "vélos, sièges pour les enfants, antivol": 210,
-                                "siège auto pour Gaspard": 30,
-                                "cables de démarrage, cable de traction, ...": 64,
-                                "liseuses (x2)": 0},
-                 "sante": {"vaccination": 1489,
-                           "trousse à pharmacie": 20},
-                 "administratif": {"passeport": 34,
-                                   "permis international": 0,
-                                   "visa": 0,
-                                   "carnet de passage en douane": 203,
-                                   "refaire la carte grise perdue": 60,
-                                   "assurance voyage pour 1 an pour 4": 1536} } %}
 {% set post_price = {"liseuses (x2)": "(offertes par nos proches)",
                      "carnet de passage en douane": "(47 pour l'adhésion à l'ACA et 156 pour le CPD en soit)",
                      "refaire la carte grise perdue": "(puis la retrouver 1 heure après être sorti de la préfecture... bouleeeets !)"} %}
@@ -50,6 +12,8 @@ Voici notre page budget. Autant que possible, nous tiendrons à jour les dépens
                     achats["sante"].values()|sum +
                     achats["administratif"].values()|sum +
                     achats["vie_quotidienne"].values()|sum %}
+{% set daily_cost = achats["vie_quotidienne"].values()|sum +
+                    achats["camping_car"]["réparations diverses lors du voyage"] %}
 <h2 class="sub-title">Camping-car</h2>
 <ul>
   {% for item, price in achats["camping_car"].items(): %}
@@ -137,6 +101,7 @@ depuis {{ days_past_since_departure }} jours et avons dépensé au total
 <strong>{{"{0:,}".format(total_cost).replace(",", " ")}} €</strong>,
 soit <strong>{{ "{0:,}".format((total_cost / days_past_since_departure)|round).replace(",", " ")|int }} € par jours</strong>.<br />
 Ce total est trompeur au début car le prix des préparatifs est inclus dedans, ça sera lissé au fur et à mesure que les jours passerons.
+Si on omet la partie préparations et qu'on ne garde que les dépenses liées à la vie (nourriture, essence…) et les réparations du camping car, ça donne <strong>{{ "{0:,}".format((daily_cost / days_past_since_departure)|round).replace(",", " ")|int }} € par jours</strong>.
 <br/><br/>
 
 <h4 class="comment">Commenter cet article</h4>

@@ -1,13 +1,14 @@
 {% extends "itinerary/layout.html" %}
 {% block panel %}
 <script src="//www.melmelboo-voyage.fr/js/ammap/ammap.js"></script>
-{% for cmap, points in maps.items() %}
+{% for cmap in countries %}
+{% set points = maps[cmap] %}
 <script type="text/javascript" src="/js/ammap/maps/js/{{cmap}}Low.js"></script>
 TODO include javascript controls (add/rm dot, add/rm coords, switch arcs sign)
 <script>var map=AmCharts.makeChart("{{cmap}}_map",
   {
     type:"map",
-    projection:"eckert3",
+//    projection:"eckert3",
     areasSettings:
     {
       unlistedAreasColor:"#EEE"

@@ -16,6 +16,13 @@ var map = AmCharts.makeChart("mapdiv", {
   },
   dataProvider: {
     map: "worldLow",
+    areas: [
+      {% for country in ['FR', 'IT', 'HR', 'AT', 'HZ', 'SI', 'SK',
+                         'HU', 'PL', 'LT', 'LV', 'EE'] %}
+        {id: "{{country}}",
+         color: "#DAF6DD"},
+      {% endfor %}
+    ],
     images: [{
       imageURL: "/images/icon-rv.png",
       height: 20,

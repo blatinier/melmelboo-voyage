@@ -3,6 +3,7 @@
 <br/>
 <br/>
 <div class="linked-posts">
+  {% if has_top_img %}
   <div class="row">
     <div class="col-lg-1"></div>
     <img src="/img/articles/Bilan_{{ country|capitalize }}.png"
@@ -11,6 +12,7 @@
          class="col-lg-10" />
     <div class="col-lg-1"></div>
   </div>
+  {% endif %}
   <div class="row">
     <div class="col-lg-12">
       <h2 class="sub-title">Articles liés</h2>

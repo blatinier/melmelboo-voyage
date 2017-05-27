@@ -177,6 +177,10 @@ article.post.head-loop {
 .head-loop .post-content {
   min-height: 0;
 }
+.post-loop-header {
+  overflow: hidden;
+  max-height: 182px;
+}
 .post-content {
   font-family: "Open Sans",sans-serif;
   font-size: 0.73em;
