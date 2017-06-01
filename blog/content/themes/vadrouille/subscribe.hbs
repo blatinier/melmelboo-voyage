@@ -1,0 +1,30 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+{{!-- The tag below includes the right menu - partials/navigation.hbs --}}
+{{> "navigation"}}
+<main class="content col-lg-9" role="main">
+  <article class="post head-loop">
+    <header class="main-header">
+      <img src="/images/header-posts.jpg" alt="Une famille autour du monde" />
+    </header>
+    <header class="main-header-mobile">
+      <img src="{{asset "images/header.jpg" }}" alt="Une famille autour du monde" />
+    </header>
+    <section class="post-content">
+      <img src="/images/globe1.jpg" id="globe-loop-post" alt="globe" />
+    </section>
+  </article>
+    <div class="posts-loop">
+      <div class="col-lg-10 col-lg-offset-2 text-center">
+        {{# if success }}
+          Vous êtes inscrit !
+          Email : <em>{{email}}</em>
+        {{else}}
+        S'incrire au nouvelles du blog <br />
+        Votre email :
+        {{subscribe_form autofocus="true"}}
+        {{/if}}
+      </div>
+    </div>
+</main>
