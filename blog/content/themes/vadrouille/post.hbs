@@ -80,6 +80,11 @@
   </div>
 </nav>
 {{#is "post"}}
+    <div class="subscribe-form col-lg-5">
+      <h4>L'EMAIL QUI MET DE LA JOIE DANS VOTRE BOÎTE AUX LETTRES !</h4>
+      <img src="/images/newsletter.jpg" alt="Inscrivez vous à notre newsletter !" />
+      {{subscribe_form placeholder="EMAIL" }}
+    </div>
     <h4 class="comment">Commenter cet article</h4>
     <section id="isso-thread"
              data-title="{{title}}"

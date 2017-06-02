@@ -112,6 +112,58 @@ hr {
 #content-home h2 {
   text-transform: none;
 }
+.subscribe-form {
+  float: right;
+  margin-top: 40px;
+}
+.subscription-title {
+  font-family: "Open Sans Condensed",sans-serif;
+  font-size: 1.3em;
+  text-transform: uppercase;
+}
+.subscribe-form > h4 {
+  font-family: "Open Sans Condensed",sans-serif;
+  font-size: 0.95em;
+}
+.subscribe-form > img {
+  margin-bottom: 20px;
+  width: 100%;
+}
+.subscribe-form form input{
+  border: 1px solid #ccc;
+  border-radius: 0;
+  font-family: "Open Sans Condensed",sans-serif;
+  width: 100%;
+}
+.subscribe-form form button{
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  color: transparent;
+  font-size: .8em;
+  width: 100%;
+}
+.subscribe-form form button:after {
+  content: "Inscrivez-vous";
+  color: #4A4A4A;
+  font-family: "Open Sans",sans-serif;
+  margin-left: -63px;
+  /* margin-left equals length of text we're replacing */
+}
+.subscription-ok {
+  margin-left: -180px;
+  margin-top: 80px;
+}
+.subscription-ok > div > div {
+  margin: auto;
+  width: 350px;
+}
+.post-content.subscription-ok > div img {
+  width: 350px;
+}
+.post-content.subscription-ok {
+  font-size: 1em;
+}
 article.post {
   margin-top: 100px;
   margin-bottom: 0;

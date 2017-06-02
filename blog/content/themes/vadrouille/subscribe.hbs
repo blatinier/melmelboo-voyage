@@ -13,18 +13,22 @@
     </header>
     <section class="post-content">
       <img src="/images/globe1.jpg" id="globe-loop-post" alt="globe" />
-    </section>
-  </article>
-    <div class="posts-loop">
-      <div class="col-lg-10 col-lg-offset-2 text-center">
+      <div class="subscription-ok text-center post-content">
         {{# if success }}
-          Vous êtes inscrit !
-          Email : <em>{{email}}</em>
+          <div class="col-lg-5">
+            <h4 class="subscription-title">L'email qui met de la joie dans votre boite aux lettres !</h4>
+            <div>
+              <img src="/images/merci.jpg" />
+            </div>
+            Vous êtes inscrit avec l'adresse <em>{{email}}</em>. <br />
+            Pour que notre newsletter n'apparaisse pas dans vos spams, pensez à ajouter l'adresse contact@melmelboo-voyage.fr à vos contacts.
+          </div>
         {{else}}
-        S'incrire au nouvelles du blog <br />
-        Votre email :
-        {{subscribe_form autofocus="true"}}
+          S'incrire au nouvelles du blog <br />
+          Votre email :
+          {{subscribe_form autofocus="true"}}
         {{/if}}
       </div>
-    </div>
+    </section>
+  </article>
 </main>
