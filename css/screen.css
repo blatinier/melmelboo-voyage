@@ -523,11 +523,14 @@ table tbody > tr:nth-child(odd) > td,
 table tbody > tr:nth-child(odd) > th {
   background-color: #F6F6F6;
 }
-
 table.plain tbody > tr:nth-child(odd) > td,
 table.plain tbody > tr:nth-child(odd) > th {
    background: transparent;
 }
 .cursor {
   cursor: pointer;
+}
+.pie-charts {
+  height: 350px;
+  width: 100%;
 }

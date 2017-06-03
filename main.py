@@ -95,6 +95,12 @@ def who_are_we_linked_posts():
 
 @application.route("/gps/maps")
 def gen_maps():
+    maps = get_maps_data()
+    return render_template("/itinerary/maps.html",
+                           **maps)
+
+
+def get_maps_data():
     with open(conf.CURRENT_POS_FILE) as pos_file:
         content = json.load(pos_file)
     rev_countries = {v: k for k, v in countries.items()}
@@ -112,11 +118,11 @@ def gen_maps():
         latitudes_by_country[map_name].append(point['latitude'])
         longitudes_by_country[map_name].append(point['longitude'])
     ordered_countries = ordered_countries[::-1]
-    return render_template("/itinerary/maps.html",
-                           maps=points_by_country,
-                           countries=ordered_countries,
-                           latitudes=latitudes_by_country,
-                           longitudes=longitudes_by_country)
+    return {"countries": ordered_countries,
+            "last_country": ordered_countries[0],
+            "maps": points_by_country,
+            "latitudes": latitudes_by_country,
+            "longitudes": longitudes_by_country}
 
 
 @application.route("/accounting/add", methods=["GET", "POST"])
@@ -252,12 +258,14 @@ def create_static_view(page):
         days_past_since_departure = (datetime.today() - departure_day).days
         with open(conf.ACCOUNTING_FILE) as acc_file:
             achats = json.load(acc_file)
+            achats_glob = {k: sum(v.values()) for k, v in achats.items()}
         with open(conf.CURRENT_POS_FILE) as pos_file:
             content = json.load(pos_file)
             pos_lat = content["latitude"]
             pos_long = content["longitude"]
             country = content.get("country")
             points_hist = content["hist"]
+        maps = get_maps_data()
         return render_template(page['tpl_file'],
                                current=page['active-menu'],
                                panel=page['active-panel'],
@@ -267,8 +275,10 @@ def create_static_view(page):
                                points_hist= points_hist,
                                country=country,
                                achats=achats,
+                               achats_glob=achats_glob,
                                days_past_since_departure=days_past_since_departure,
-                               departure_day=departure_day)
+                               departure_day=departure_day,
+                               **maps)
     return view
 
 

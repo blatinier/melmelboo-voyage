@@ -1,5 +1,8 @@
 {% extends "planning/layout.html" %}
 {% block panel %}
+<script src="/js/amcharts/amcharts.js"></script>
+<script src="/js/amcharts/pie.js"></script>
+<script src="/js/amcharts/light.js"></script>
 <br/>
 Voici notre page budget. Autant que possible, nous tiendrons à jour les dépenses liées à la préparation du voyage et au voyage lui-même afin d'y voir clair dans nos comptes mais aussi afin de permettre à de futurs voyageurs de se projeter dans leur financement.
 <br /><br />
@@ -96,12 +99,47 @@ pour les dépenses liées à notre vie quotidienne.
 <br /><br />
 
 <h2 class="sub-title">Bilan</h2>
-Avec tout ça, nous sommes partis
-depuis {{ days_past_since_departure }} jours et avons dépensé au total
+Avec tout ça, nous sommes partis depuis
+<strong>{{ days_past_since_departure }} jours</strong>
+et avons dépensé au total
 <strong>{{"{0:,}".format(total_cost).replace(",", " ")}} €</strong>,
 soit <strong>{{ "{0:,}".format((total_cost / days_past_since_departure)|round).replace(",", " ")|int }} € par jours</strong>.<br />
 Ce total est trompeur au début car le prix des préparatifs est inclus dedans, ça sera lissé au fur et à mesure que les jours passerons.
 Si on omet la partie préparations et qu'on ne garde que les dépenses liées à la vie (nourriture, essence…) et les réparations du camping car, ça donne <strong>{{ "{0:,}".format((daily_cost / days_past_since_departure)|round).replace(",", " ")|int }} € par jours</strong>.
+<br />
+<br />
+<script>
+var chart = AmCharts.makeChart("bilan", {
+  "type": "pie",
+  "titles": [{"text": "Répartition des dépenses"}],
+  "theme": "light",
+  "dataProvider": [
+    {% for cat, amount in achats_glob.items(): %}
+      {"category": "{{cat|replace('_', ' ')|capitalize}}",
+       "amount": {{amount}} },
+    {% endfor %}],
+  "valueField": "amount",
+  "titleField": "category",
+  "balloon":{"fixedPosition":true}
+} );
+</script>
+<div id="bilan" class="pie-charts"></div>
+<script>
+var chart = AmCharts.makeChart("vie-quot", {
+  "type": "pie",
+  "titles": [{"text": "Dépenses liées à la vie quotidienne"}],
+  "theme": "light",
+  "dataProvider": [
+    {% for cat, amount in achats["vie_quotidienne"].items(): %}
+      {"category": "{{cat|capitalize}}",
+       "amount": {{amount}} },
+    {% endfor %}],
+  "valueField": "amount",
+  "titleField": "category",
+  "balloon":{"fixedPosition":true}
+} );
+</script>
+<div id="vie-quot" class="pie-charts"></div>
 <br/><br/>
 
 <h4 class="comment">Commenter cet article</h4>
