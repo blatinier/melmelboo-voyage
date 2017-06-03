@@ -17,7 +17,10 @@
   </section>
 </article>
 {% if not success %}
-<section id="isso-thread" class="contact-img">
+<div id="contact-img">
+  <img width="640" src="/images/contact_nb.jpg" alt="" />
+</div>
+<section id="isso-thread">
   <form action="{{ url_for('contact') }}" method=post>
     <div class="isso-postbox">
       <div class="form-wrapper">

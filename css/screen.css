@@ -266,9 +266,11 @@ main.content.contact {
   padding-left: 40px;
   padding-right: 0;
 }
-.contact-img {
-  background: #fff url("/images/contact_nb.jpg") no-repeat scroll bottom right;
-  background-size: 62%;
+#contact-img {
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  z-index: -1;
 }
 #content-home {
   text-align: center;
