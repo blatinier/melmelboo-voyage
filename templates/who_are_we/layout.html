@@ -18,6 +18,11 @@
           Portraits de famille
         </a>
       </li>
+      <li {%- if panel == "press" %} class="active" {%- endif %}>
+        <a class="sub-title" href="{{ url_for('press') }}">
+          Presse
+        </a>
+      </li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane active">

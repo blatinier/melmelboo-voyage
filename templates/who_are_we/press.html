@@ -1,0 +1,88 @@
+{% extends "who_are_we/layout.html" %}
+{% block panel %}
+<br/>
+
+{% for title, image, link, external_link, video in [
+  ('Article paru sur Côté Maison',
+   '/img/articles/2017/coté_maison_article01.png',
+   '',
+   'Accès à l\'article par <a href="http://projets.cotemaison.fr/projet/5651#48266">ici</a>.',
+   ''),
+  ('Reportage pour la Quotidienne sur France 5',
+   '',
+   '/blog/on-passe-a-la-tele',
+   '',
+   '/img/articles/2017/reportage-laquotidienne'),
+  ('Interview chez Graines de baroudeurs',
+   '/img/articles/2017/grainesdebaroudeurs.png',
+   '/blog/petite-interview-chez-graines-de-baroudeurs',
+   'Accès à l\'interview par <a href="http://grainesdebaroudeurs.com/melmelboovoyage-une-famille-autour-du-monde">ici</a>.',
+   ''),
+  ('Article paru dans Le Télégramme (06 mars 2017)',
+   '/img/articles/2017/Article_Télégramme_mars2017.png',
+   '/blog/notre-depart-vu-par-la-presse-locale/',
+   'Accès à l\'article par <a href="http://www.letelegramme.fr/morbihan/damgan/tour-du-monde-le-grand-depart-06-03-2017-11423794.php">ici</a>.',
+   ''),
+  ('Article paru dans le Ouest France (05 mars 2017)',
+   '/img/articles/2017/Article_Ouest_France_mars2017.png',
+   '/blog/notre-depart-vu-par-la-presse-locale/',
+   'Accès à l\'article par <a href="http://www.ouest-france.fr/bretagne/damgan-56750/une-famille-embarque-pour-un-tour-du-monde-4840194">ici</a>.',
+   ''),
+  ('Article paru dans Le Télégramme (31 janvier 2017)',
+   '/img/articles/2017/Article_Télégramme_janvier2017',
+   '/blog/melmelboo-dans-la-presse/',
+   'Accès à l\'article par <a href="http://www.letelegramme.fr/morbihan/damgan/famille-latinier-le-tour-du-monde-en-730-jours-31-01-2017-11383554.php">ici</a>.',
+   ''),
+  ('Article paru dans le Ouest France (12 janvier 2017)',
+   '/img/articles/2017/Article_Ouest_France_février2017',
+   '/blog/melmelboo-dans-la-presse/',
+   'Accès à l\'article par <a href="http://www.ouest-france.fr/bretagne/damgan-56750/deux-ans-autour-du-monde-en-camping-car-4790668">ici</a>.',
+   ''),
+  ('Interview chez Tipiyou',
+   '/img/articles/2017/Tipiyou.JPG',
+   '/blog/petite-interview-chez-tipiyou',
+   'Accès à l\'interview par <a href="https://www.tipiyou.com/fr/blog/268_voyage-camping-car-2-ans-de-tour-du-monde-en-famille.html">ici</a>.',
+   ''),
+  ('Rencontre à la bibliothèque de Damgan',
+   '/img/articles/2017/bibliothèque_Damgan_rencontre.jpg',
+   '/blog/rencontre-a-la-bibliotheque-de-damgan',
+   '',
+   '')] %}
+<h2 class="sub-title">{{ title }}</h2>
+<div class="col-lg-12">
+  J'en parle
+  <a href="{{ link }}">
+    dans cet article
+  </a>.
+  {% if external_link %}
+    {{ external_link|safe }}
+  {% endif %}
+  <br />
+  <br />
+</div>
+  {% if image %}
+    <div class="col-lg-12">
+      <img src="{{ image }}"
+           alt="{{ title }}"
+           title="{{ title }}"
+           style="width: 50%; margin-bottom: 30px;" />
+    </div>
+  {% endif %}
+  {% if video %}
+    <div style="width: 100%; margin-bottom: 30px;">
+      <div style="width:450px;">
+        <video width="450" controls preload="none">
+          <source src="{{ video }}.webm" type="video/webm"/>
+          <source src="/img/articles/2017/reportage-laquotidienne.mp4" type="video/mp4"/>
+          <source src="/img/articles/2017/reportage-laquotidienne.ogv" type="video/ogg"/>
+        </video>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+<div class="col-lg-12">
+  <h4 class="comment">Commenter cet article</h4>
+  <section id="isso-thread"
+         data-title="Qui sommes-nous"></section>
+</div>
+{% endblock %}
