@@ -50,10 +50,12 @@
    '')] %}
 <h2 class="sub-title">{{ title }}</h2>
 <div class="col-lg-12">
+  {% if link %}
   J'en parle
   <a href="{{ link }}">
     dans cet article
   </a>.
+  {% endif %}
   {% if external_link %}
     {{ external_link|safe }}
   {% endif %}
