@@ -130,6 +130,10 @@ def accounting():
     last_action = ""
     with open(conf.ACCOUNTING_FILE) as acc_file:
         achats = json.load(acc_file)
+        cats = sorted(list(achats.keys()), reverse=True)
+        sscats = dict()
+        for cat in cats:
+            sscats[cat] = sorted(list(achats[cat].keys()))
     if request.method == "POST":
         cat, scat = request.form['spending_type'].split(" -- ")
         amount = int(request.form['amount'])
@@ -140,6 +144,8 @@ def accounting():
                 last_action = "Added %s to %s -- %s" % (amount, cat, scat)
     return render_template("/planning/accounting.html",
                            achats=achats,
+                           cats=cats,
+                           sscats=sscats,
                            last_action=last_action)
 
 

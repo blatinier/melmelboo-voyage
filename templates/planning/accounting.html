@@ -3,8 +3,8 @@
 <form method="post">
   <div class="col-lg-2">Spending type: </div>
   <select class="col-lg-10" name="spending_type">
-    {% for cat in achats %}
-      {% for scat in achats[cat] %}
+    {% for cat in cats %}
+      {% for scat in sscats[cat] %}
         <option value="{{ cat }} -- {{ scat }}">
           {{ cat }} -- {{ scat }}
         </option>
