@@ -117,6 +117,16 @@ def get_maps_data():
         points_by_country[map_name].append(point)
         latitudes_by_country[map_name].append(point['latitude'])
         longitudes_by_country[map_name].append(point['longitude'])
+    # Add last position point
+    country = rev_countries[content['country']]
+    map_name = country.replace(" ", "")
+    map_name = map_name[0].lower() + map_name[1:]
+    if map_name not in ordered_countries:
+        ordered_countries.append(map_name)
+    points_by_country[map_name].append({"latitude": content['latitude'],
+                                        "longitude": content['longitude']})
+    latitudes_by_country[map_name].append(content['latitude'])
+    longitudes_by_country[map_name].append(content['longitude'])
     ordered_countries = ordered_countries[::-1]
     return {"countries": ordered_countries,
             "last_country": ordered_countries[0],
