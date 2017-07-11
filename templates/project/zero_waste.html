@@ -1,0 +1,28 @@
+{% extends "project/layout.html" %}
+{% block panel %}
+<br/>
+<br/>
+Je suis persuadée qu’il faut être le changement que l’on veut voir dans le monde plutôt qu’attendre que d’autres initient le mouvement. C’est pourquoi à ma toute petite échelle, je prend plaisir à partager ici les solutions, les découvertes, les astuces qui ont trouvé leur place dans notre quotidien pour un mode de vie plus respectieux de la planète et de tous ses habitants.
+<br/>
+<br/>
+<h2 class="sub-title">Vers un mode de vie zéro déchet</h2>
+<br/>
+<div class="linked-posts">
+{% for post in posts %}
+  <article class="row post-search">
+    <header class="col-lg-4">
+      <a href="{{post.slug}}">
+        <img style="width:92%;" alt="{{post.title}}" src="{{post.image}}" />
+      </a>
+    </header>
+    <section class="post-excerpt col-lg-8">
+      <a href="{{post.slug}}">
+        <h2 class="post-title">{{post.title}}</h2>
+        <p>{{post.excerpt}}...</p>
+        <p class="read-more">Lire la suite →</p>
+      </a>
+    </section>
+  </article>
+{% endfor %}
+</div>
+{% endblock %}

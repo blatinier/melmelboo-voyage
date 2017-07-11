@@ -211,6 +211,34 @@ def itinerary_linked_posts(country):
                            country=country,
                            has_top_img=has_top_img)
 
+@application.route("/zero_waste")
+def zero_waste_posts():
+    ghost = sqlite3.connect(conf.BLOG_VOYAGE_DB)
+    ghost_cur = ghost.cursor()
+    ghost_cur.execute("SELECT title, image, html, slug FROM posts WHERE id IN "
+                      "(SELECT post_id FROM posts_tags WHERE tag_id=17) "
+                      "AND published_at < DATE('now') "
+                      "ORDER BY published_at DESC")
+    posts = [{'title': i[0],
+              'image': i[1],
+              'excerpt': excerpt(i[2]),
+              'slug': '/blog/' + i[3]} for i in ghost_cur.fetchall()]
+    ghost.close()
+    melmelboo = sqlite3.connect(conf.BLOG_MELMELBOO_DB)
+    melmelboo_cur = melmelboo.cursor()
+    melmelboo_cur.execute("SELECT title, image, html, slug FROM posts WHERE id IN "
+                      "(SELECT post_id FROM posts_tags WHERE tag_id=52) "
+                      "AND published_at < DATE('now') "
+                      "ORDER BY published_at DESC")
+    for i in melmelboo_cur.fetchall():
+        posts.append({'title': i[0],
+                      'image': i[1],
+                      'excerpt': excerpt(i[2]),
+                      'slug': '//melmelboo.fr/blog/' + i[3]})
+    melmelboo_cur.close()
+    return render_template('project/zero_waste.html', posts=posts,
+                           current="project", panel="zero_waste")
+
 @application.route("/preparation/related")
 def planning_linked_posts():
     ghost = sqlite3.connect(conf.BLOG_VOYAGE_DB)
