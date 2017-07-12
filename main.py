@@ -104,6 +104,7 @@ def get_maps_data():
     with open(conf.CURRENT_POS_FILE) as pos_file:
         content = json.load(pos_file)
     rev_countries = {v: k for k, v in countries.items()}
+    rev_countries["en Russie"] = "Russia"
     points_by_country = defaultdict(list)
     latitudes_by_country = defaultdict(list)
     longitudes_by_country = defaultdict(list)
