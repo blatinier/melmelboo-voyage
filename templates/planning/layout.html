@@ -18,6 +18,11 @@
           Vaccins
         </a>
       </li>
+      <li {%- if panel == "bagages" %} class="active" {%- endif %}>
+        <a class="sub-title" href="{{ url_for('bagages') }}">
+          Bagages
+        </a>
+      </li>
       <li {%- if panel == "linked_posts" %} class="active" {%- endif %}>
         <a class="sub-title" href="{{ url_for('planning_linked_posts') }}">
           Articles liés
