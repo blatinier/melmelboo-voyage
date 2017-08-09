@@ -7,7 +7,7 @@
 Voici notre page budget. Autant que possible, nous tiendrons à jour les dépenses liées à la préparation du voyage et au voyage lui-même afin d'y voir clair dans nos comptes mais aussi afin de permettre à de futurs voyageurs de se projeter dans leur financement.
 <br /><br />
 
-{% set post_price = {"liseuses (x2)": "(offertes par nos proches)",
+{% set post_price = {"liseuses (x2)": '(offertes par nos proches) Trouvable <a href="http://click.linksynergy.com/fs-bin/click?id=engMLcS3BAc&offerid=332069&type=3&subid=0">ici</a><IMG border=0 width=1 height=1 src="http://ad.linksynergy.com/fs-bin/show?id=engMLcS3BAc&bids=332069&type=3&subid=0">',
                      "carnet de passage en douane": "(47 pour l'adhésion à l'ACA et 156 pour le CPD en soit)",
                      "refaire la carte grise perdue": "(puis la retrouver 1 heure après être sorti de la préfecture... bouleeeets !)"} %}
 {% set total_cost = achats["camping_car"].values()|sum +
@@ -38,7 +38,7 @@ pour transformer le camping-car en fonction de nos besoins (et de nos envies aus
     <li>{{item}} :
       <strong>
         {{"{0:,}".format(price).replace(",", " ")}}
-        € {% if post_price.get(item) %}{{post_price.get(item)}}{% endif %}
+        € {% if post_price.get(item) %}{{post_price.get(item)|safe}}{% endif %}
       </strong>
     </li>
   {% endfor %}
