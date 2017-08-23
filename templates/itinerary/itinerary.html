@@ -62,7 +62,8 @@ var map = AmCharts.makeChart("mapdiv", {
     map: "worldLow",
     areas: [
       {% for country in ['FR', 'IT', 'HR', 'AT', 'HZ', 'SI', 'SK',
-                         'HU', 'PL', 'LT', 'LV', 'EE', 'RU'] %}
+                         'HU', 'PL', 'LT', 'LV', 'EE', 'RU', 'FI',
+                         'SE'] %}
         {id: "{{country}}",
          color: "#DAF6DD"},
       {% endfor %}
