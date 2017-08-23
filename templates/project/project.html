@@ -1,6 +1,21 @@
 {% extends "project/layout.html" %}
 {% block panel %}
 <p></p>
+  {% for img_nb, img_title in [('01', 'Croatie'),
+                               ('02', 'Russie'),
+                               ('03', 'Croatie'),
+                               ('04', 'Croatie'),
+                               ] %}
+    <img class="col-lg-3" src="/images/page_accueil{{img_nb}}.JPG" alt="{{img_title}}" title="{{img_title}}" />
+  {% endfor %}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <h2 class="sub-title">Pourquoi partir au bout du monde en famille ?</h2>
 <p>Un jour on se réveille avec l'envie de partir, de tout quitter. Cet appartement parisien si mignon mais trop petit pour notre famille qui va bientôt s'agrandir. Cette ville immense si peu adaptée aux enfants et à leurs parents. Ces journées trop remplies qui n'en finissent pas entre métro, boulot et dodo. Vouloir tenir à distance pour un temps cette course du quotidien. S'autoriser une parenthèse.</p>
 <p>Et puis cette fichue mutation qui prendra encore des années. Notre rêve de maison à la campagne qui s'éloigne un peu plus chaque jours. La faute à personne. Tu es trop jeune, tu n'as pas assez de point d'ancienneté dans l'éducation nationale. De toute manière les mouvements sont limités. Laisse ta famille partir loin de toi quelques années et essaye de gagner des points avec le rapprochement de conjoint ! Comment font les autres...</p>
