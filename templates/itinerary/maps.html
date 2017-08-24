@@ -1,6 +1,7 @@
 {% extends "itinerary/layout.html" %}
 {% block panel %}
 <script src="//www.melmelboo-voyage.fr/js/ammap/ammap.js"></script>
+<script src="//www.melmelboo-voyage.fr/js/ammap/maps/js/worldLow.js" type="text/javascript"></script>
 {% for cmap in countries %}
 {% set points = maps[cmap] %}
 <script type="text/javascript" src="/js/ammap/maps/js/{{cmap}}Low.js"></script>
@@ -44,5 +45,27 @@ TODO include javascript controls (add/rm dot, add/rm coords, switch arcs sign)
 );</script>
 <div id="{{cmap}}_map" style="width: 100%; background-color:#FFF; height: 500px;"></div>
 {% endfor %}
+<script type="text/javascript">
+var map = AmCharts.makeChart("mapdiv", {
+  type: "map",
+  projection: "eckert3",
+  "areasSettings": {
+    "unlistedAreasColor": "#EEE"
+  },
+  zoomDuration: 0,
+  zoomControl: {
+    top: 170
+  },
+  dataProvider: {
+    map: "worldLow",
+  }
+});
+AmCharts.ready(function () {
+  map.moveDown(0.1);
+});
+</script>
+<div id="mapdiv" style="width: 100%; background-color:#FFF; height: 500px;"></div>
+
+
 {% endblock %}
 
