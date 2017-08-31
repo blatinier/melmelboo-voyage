@@ -2,7 +2,6 @@
 {% block panel %}
 <link rel="stylesheet" href="//www.melmelboo-voyage.fr/js/ammap/ammap.css" type="text/css">
 <script src="//www.melmelboo-voyage.fr/js/ammap/ammap.js" type="text/javascript"></script>
-<script src="//www.melmelboo-voyage.fr/js/ammap/maps/js/worldLow.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/ammap/maps/js/{{last_country}}Low.js"></script>
 <script type="text/javascript">
 var countrymap=AmCharts.makeChart("{{last_country}}_map",
@@ -47,46 +46,11 @@ var countrymap=AmCharts.makeChart("{{last_country}}_map",
   }
 );
 </script>
-<script type="text/javascript">
-var map = AmCharts.makeChart("mapdiv", {
-  type: "map",
-  projection: "eckert3",
-  "areasSettings": {
-    "unlistedAreasColor": "#EEE"
-  },
-  zoomDuration: 0,
-  zoomControl: {
-    top: 170
-  },
-  dataProvider: {
-    map: "worldLow",
-    areas: [
-      {% for country in ['FR', 'IT', 'HR', 'AT', 'HZ', 'SI', 'SK',
-                         'HU', 'PL', 'LT', 'LV', 'EE', 'RU', 'FI',
-                         'SE'] %}
-        {id: "{{country}}",
-         color: "#DAF6DD"},
-      {% endfor %}
-    ],
-    images: [{
-      imageURL: "/images/icon-rv.png",
-      height: 20,
-      width: 40,
-      label: "Nous sommes {{ country }} !",
-      labelRollOverColor: "#000",
-      labelPosition: "bottom",
-      scale: 0.5,
-      latitude: {{ latitude }},
-      longitude: {{ longitude }},
-      color: "#000"
-    }]
-  }
-});
-AmCharts.ready(function () {
-  map.moveDown(0.1);
-});
-</script>
-<div id="mapdiv" style="width: 100%; background-color:#FFF; height: 500px;"></div>
+<p><br />Actuellement, Nous sommes {{ country }} !</p>
+<img src="/img/articles/2017/itinéraire_baloo.png"
+     alt="Nous sommes {{ country }} !"
+     title="Nous sommes {{ country }} !"
+     class="full-width" />
 <br />
 <h2 class="sub-title">Et plus précisément</h2>
 <div id="{{last_country}}_map" style="width: 100%; background-color:#FFF; height: 500px;"></div>
