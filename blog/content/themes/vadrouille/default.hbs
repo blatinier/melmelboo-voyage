@@ -28,6 +28,24 @@
     <link rel="stylesheet" type="text/css" href="/css/shadowbox.css" />
     {{!-- Ghost outputs important style and meta data with this tag --}}
     {{ghost_head}}
+    <meta name="twitter:site" content="@MelmelbooVoyage" />
+    <!-- Because twitter will fallback to the og data it will automatically pick up the
+         title image and description from the below facebook open graph tags.
+         Hence, we do not include them above to avoid duplication -->
+    <!-- Facebook Open Graph Meta Tags -->
+    <meta property="og:site_name" content="Melmelboo Voyage" />
+    <meta property="og:url" content="{{@blog.url}}{{url}}" />
+    <meta property="og:title" content="{{meta_title}}" />
+    <meta property="og:description" content="{{meta_description}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    {{#is "post"}}
+      {{#post}}
+        <meta property="og:image" content="{{image absolute='true'}}" />
+      {{/post}}
+    {{else}}
+      <meta property="og:image" content="{{@blog.url}}{{@blog.logo}}" />
+    {{/is}}
 </head>
 <body class="{{body_class}} nav-closed">
  <noscript><p><img src="//stats.melmelboo.fr/piwik.php?idsite=3" style="border:0;" alt="" /></p></noscript>

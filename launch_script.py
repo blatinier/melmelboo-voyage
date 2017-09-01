@@ -17,3 +17,10 @@ if __name__ == "__main__":
     elif args.script == "mails_to_mailchimp":
         from scripts.mailchimp import transfer
         transfer(conf.MAILCHIMP_API_KEY, conf.BLOG_VOYAGE_DB)
+    elif args.script == "tweet_new_article":
+        from scripts.twitter import tweet_new_article
+        tweet_new_article(conf.TWITTER_CONSUMER_KEY,
+                          conf.TWITTER_CONSUMER_SECRET,
+                          conf.TWITTER_ACCESS_TOKEN_KEY,
+                          conf.TWITTER_ACCESS_TOKEN_SECRET,
+                          conf.BLOG_VOYAGE_DB)
