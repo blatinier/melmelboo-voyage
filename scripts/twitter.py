@@ -2,6 +2,16 @@
 # -*- coding: utf-8 -*-
 import sqlite3
 import twitter
+import re
+import urllib.parse
+
+
+def iri_to_uri(url):
+    url = urllib.parse.urlsplit(url)
+    url = list(url)
+    url[2] = urllib.parse.quote(url[2])
+    url = urllib.parse.urlunsplit(url)
+    return url
 
 
 def tweet_new_article(twitter_ckey, twitter_csecret,
@@ -22,4 +32,6 @@ def tweet_new_article(twitter_ckey, twitter_csecret,
         image_url = post[1]
         if image_url.startswith("//"):
             image_url = "https:" + image_url
-        api.PostMedia(post[0] + " https://www.melmelboo-voyage.fr/blog/" + post[2], image_url)
+        msg = "%s https://www.melmelboo-voyage.fr/blog/%s" % (post[0], post[2])
+        image_url = iri_to_uri(image_url)
+        api.PostMedia(msg, image_url)
