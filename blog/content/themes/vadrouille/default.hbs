@@ -69,8 +69,40 @@
     <script type="text/javascript">
       Shadowbox.init({displayCounter: false, displayNav: true});
       $(function(){
+        function createCookie(name,value,days) {
+          var expires = "";
+          if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+          }
+          document.cookie = name + "=" + value + expires + "; path=/";
+        }
+        function readCookie(name) {
+          var nameEQ = name + "=";
+          var ca = document.cookie.split(';');
+          for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+          }
+          return null;
+        }
+        function eraseCookie(name) {
+          createCookie(name,"",-1);
+        }
         $(".post-content img").not("#globe").not("#globe-loop-post").each(function(index){
           $(this).wrap('<a href="'+$(this).attr("src")+'" rel="shadowbox[Gallerie]" />');
+        });
+        console.log(readCookie('melmelboo-voyage-share-box'));
+        if (readCookie('melmelboo-voyage-share-box') === "NOP") {
+          $("#share-tooltip").hide();
+        }
+        $("#no-share-box").click(function (e) {
+          console.log("No more tooltip box");
+          e.preventDefault();
+          $("#share-tooltip").hide();
+          createCookie('melmelboo-voyage-share-box', 'NOP', 30);
         });
       });
     </script>
