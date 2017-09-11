@@ -245,6 +245,14 @@
             function(){ $(this).removeClass('open') }
           );
         });
+        $(function () {
+          $(".press-head").click(function(e) {
+            console.log("mserde");
+            console.log($(".press-pan"));
+            $(".press-pan").removeClass('show');
+            $(".press-pan").removeClass('in');
+          });
+        });
     </script>
 </body>
 </html>

@@ -2,91 +2,122 @@
 {% block panel %}
 <br/>
 
-{% for title, image, link, external_link, video in [
-  ('Article paru sur Le Journal de la Maison',
+<div id="accordion" role="tablist" aria-multiselectable="true">
+{% for num, title, image, link, external_link, video in [
+  (11,
+   'Article paru sur le HUFFINGTON POST',
+   '/img/articles/2017/article_le_huffpost_aout2017.png',
+   '/blog/presse_article_le_huffpost/',
+   'Accès à l\'article par <a href="http://www.huffingtonpost.fr/camille-latinier/nous-faisons-un-tour-du-monde-avec-nos-enfants-et-ces-astuces-peuvent-vous-interesser-aussi_a_23158766/?utm_hp_ref=fr-homepage">ici</a>.',
+   ''),
+  (10,
+   'Article paru sur LE JOURNAL DE LA MAISON',
    '/img/articles/2017/le_journal_de_la_maison01.png',
    '/blog/interview-jounal-de-la-maison/',
    'Accès à l\'article par <a href="http://www.lejournaldelamaison.fr/le-journal-de-la-maison/reportages-maisons/visite-insolite-camping-mignon-du-monde-140099.html#item=1">ici</a>.',
    ''),
-  ('Article paru sur Côté Maison',
+  (9,
+   'Article paru sur CÔTÉ MAISON',
    '/img/articles/2017/coté_maison_article01.png',
    '',
    'Accès à l\'article par <a href="http://projets.cotemaison.fr/projet/5651#48266">ici</a>.',
    ''),
-  ('Reportage pour la Quotidienne sur France 5',
+  (8,
+   'Reportage pour LA QUOTIDIENNE sur France 5',
    '',
    '/blog/on-passe-a-la-tele',
    '',
    '/img/articles/2017/reportage-laquotidienne'),
-  ('Interview chez Graines de baroudeurs',
+  (7,
+   'Interview chez GRAINES DE BAROUDEURS',
    '/img/articles/2017/grainesdebaroudeurs.png',
    '/blog/petite-interview-chez-graines-de-baroudeurs',
    'Accès à l\'interview par <a href="http://grainesdebaroudeurs.com/melmelboovoyage-une-famille-autour-du-monde">ici</a>.',
    ''),
-  ('Article paru dans Le Télégramme (06 mars 2017)',
+  (6,
+   'Article paru dans LE TÉLÉGRAMME (06 mars 2017)',
    '/img/articles/2017/Article_Télégramme_mars2017.png',
    '/blog/notre-depart-vu-par-la-presse-locale/',
    'Accès à l\'article par <a href="http://www.letelegramme.fr/morbihan/damgan/tour-du-monde-le-grand-depart-06-03-2017-11423794.php">ici</a>.',
    ''),
-  ('Article paru dans le Ouest France (05 mars 2017)',
+  (5,
+   'Article paru dans le OUEST FRANCE (05 mars 2017)',
    '/img/articles/2017/Article_Ouest_France_mars2017.png',
    '/blog/notre-depart-vu-par-la-presse-locale/',
    'Accès à l\'article par <a href="http://www.ouest-france.fr/bretagne/damgan-56750/une-famille-embarque-pour-un-tour-du-monde-4840194">ici</a>.',
    ''),
-  ('Article paru dans Le Télégramme (31 janvier 2017)',
+  (4,
+   'Article paru dans LE TÉLÉGRAMME (31 janvier 2017)',
    '/img/articles/2017/Article_Télégramme_janvier2017',
    '/blog/melmelboo-dans-la-presse/',
    'Accès à l\'article par <a href="http://www.letelegramme.fr/morbihan/damgan/famille-latinier-le-tour-du-monde-en-730-jours-31-01-2017-11383554.php">ici</a>.',
    ''),
-  ('Article paru dans le Ouest France (12 janvier 2017)',
+  (3,
+   'Article paru dans le OUEST FRANCE (12 janvier 2017)',
    '/img/articles/2017/Article_Ouest_France_février2017',
    '/blog/melmelboo-dans-la-presse/',
    'Accès à l\'article par <a href="http://www.ouest-france.fr/bretagne/damgan-56750/deux-ans-autour-du-monde-en-camping-car-4790668">ici</a>.',
    ''),
-  ('Interview chez Tipiyou',
+  (2,
+   'Interview chez TIPIYOU',
    '/img/articles/2017/Tipiyou.JPG',
    '/blog/petite-interview-chez-tipiyou',
    'Accès à l\'interview par <a href="https://www.tipiyou.com/fr/blog/268_voyage-camping-car-2-ans-de-tour-du-monde-en-famille.html">ici</a>.',
    ''),
-  ('Rencontre à la bibliothèque de Damgan',
+  (1,
+   'Rencontre à la BIBLIOTHÈQUE DE DAMGAN',
    '/img/articles/2017/bibliothèque_Damgan_rencontre.jpg',
    '/blog/rencontre-a-la-bibliotheque-de-damgan',
    '',
    '')] %}
-<h2 class="sub-title">{{ title }}</h2>
-<div class="col-lg-12">
-  {% if link %}
-  J'en parle
-  <a href="{{ link }}">
-    dans cet article
-  </a>.
-  {% endif %}
-  {% if external_link %}
-    {{ external_link|safe }}
-  {% endif %}
-  <br />
-  <br />
-</div>
-  {% if image %}
-    <div class="col-lg-12">
-      <img src="{{ image }}"
-           alt="{{ title }}"
-           title="{{ title }}"
-           style="width: 50%; margin-bottom: 30px;" />
+  <div class="card">
+    <div class="card-header" role="tab" id="heading{{ num }}">
+      <a class="press-head {% if num != 11 %}collapsed{% endif %}" data-toggle="collapse" data-parent="#accordion"
+         data-target="#collapse{{ num }}" aria-expanded="false" aria-controls="collapse{{ num }}">
+        {{ title }}
+      </a>
     </div>
-  {% endif %}
-  {% if video %}
-    <div style="width: 100%; margin-bottom: 30px;">
-      <div style="width:450px;">
-        <video width="450" controls preload="none">
-          <source src="{{ video }}.webm" type="video/webm"/>
-          <source src="/img/articles/2017/reportage-laquotidienne.mp4" type="video/mp4"/>
-          <source src="/img/articles/2017/reportage-laquotidienne.ogv" type="video/ogg"/>
-        </video>
+    <div id="collapse{{ num }}" class="press-pan collapse {% if num == 11 %}show{% endif %}" role="tabpanel" aria-labelledby="heading{{ num }}">
+      <div class="card-block">
+        <div class="col-lg-12">
+          {% if link %}
+          J'en parle
+          <a href="{{ link }}">
+            dans cet article
+          </a>.
+          {% endif %}
+          {% if external_link %}
+            {{ external_link|safe }}
+          {% endif %}
+          <br />
+          <br />
+        </div>
+        {% if image %}
+          <div class="col-lg-12">
+            <img src="{{ image }}"
+                 alt="{{ title }}"
+                 title="{{ title }}"
+                 style="width: 50%; margin-bottom: 30px;" />
+          </div>
+        {% endif %}
+        {% if video %}
+          <div style="width: 100%; margin-bottom: 30px;">
+            <div style="width:450px;">
+              <video width="450" controls preload="none">
+                <source src="{{ video }}.webm" type="video/webm"/>
+                <source src="/img/articles/2017/reportage-laquotidienne.mp4" type="video/mp4"/>
+                <source src="/img/articles/2017/reportage-laquotidienne.ogv" type="video/ogg"/>
+              </video>
+            </div>
+          </div>
+        {% endif %}
       </div>
     </div>
-  {% endif %}
+  </div>
 {% endfor %}
+</div>
+<script type="text-javascript">
+</script>
 <div class="col-lg-12">
   <h4 class="comment">Commenter cet article</h4>
   <section id="isso-thread"
