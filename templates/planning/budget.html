@@ -16,7 +16,8 @@ Voici notre page budget. Autant que possible, nous tiendrons à jour les dépens
                     achats["administratif"].values()|sum +
                     achats["vie_quotidienne"].values()|sum %}
 {% set daily_cost = achats["vie_quotidienne"].values()|sum +
-                    achats["camping_car"]["réparations diverses lors du voyage"] %}
+                    achats["camping_car"]["réparations diverses lors du voyage"] -
+                    achats["vie_quotidienne"]["Transport (cargo, péage, ...)"] %}
 <h2 class="sub-title">Camping-car</h2>
 <ul>
   {% for item, price in achats["camping_car"].items(): %}
@@ -131,8 +132,10 @@ var chart = AmCharts.makeChart("vie-quot", {
   "theme": "light",
   "dataProvider": [
     {% for cat, amount in achats["vie_quotidienne"].items(): %}
-      {"category": "{{cat|capitalize}}",
-       "amount": {{amount}} },
+      {% if cat != "Transport (cargo, péage, ...)" %}
+        {"category": "{{cat|capitalize}}",
+         "amount": {{amount}} },
+      {% endif %}
     {% endfor %}],
   "valueField": "amount",
   "titleField": "category",
