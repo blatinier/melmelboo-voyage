@@ -300,8 +300,9 @@ def search(page):
 def create_static_view(page):
     def view():
         departure_day = datetime(2017, 3, 4)
+        arrival_day = datetime(2018, 1, 13)
         # minus 30 for the Toulouse rest while Baloo on the boat
-        days_past_since_departure = (datetime.today() - departure_day).days - 30
+        days_past_since_departure = (arrival_day - departure_day).days - 30
         with open(conf.ACCOUNTING_FILE) as acc_file:
             achats = json.load(acc_file)
             achats_glob = {k: sum(v.values()) for k, v in achats.items()}
