@@ -94,7 +94,6 @@
         $(".post-content img").not("#globe").not("#globe-loop-post").each(function(index){
           $(this).wrap('<a href="'+$(this).attr("src")+'" rel="shadowbox[Gallerie]" />');
         });
-        console.log(readCookie('melmelboo-voyage-share-box'));
         if (readCookie('melmelboo-voyage-share-box') === "NOP") {
           $("#share-tooltip").hide();
         }
