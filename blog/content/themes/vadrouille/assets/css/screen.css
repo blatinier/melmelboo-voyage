@@ -3,7 +3,6 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%
 }
-body { margin: 0; }
 article, aside, details,
 footer, header,
 main, menu, nav,
@@ -24,12 +23,14 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
+  color: #4A4A4A;
   height: 100%;
+  margin: 0;
   max-height: 100%;
   font-family: "Merriweather", serif;
   font-size: 1.8rem;
   line-height: 1.75em;
-  color: #4A4A4A;
+  overflow-x: hidden;
   -webkit-font-feature-settings: 'kern' 1;
   -moz-font-feature-settings: 'kern' 1;
   -o-font-feature-settings: 'kern' 1;
@@ -211,15 +212,12 @@ table.plain tbody > tr:nth-child(odd) > td,
 table.plain tbody > tr:nth-child(odd) > th {
    background: transparent;
 }
-
-
 .post {
   margin: 4rem auto;
   padding-bottom: 4rem;
   position: relative;
   word-wrap: break-word;
 }
-
 article.post.head-loop {
   margin-bottom: 3rem;
   margin-left: 10em;
@@ -752,8 +750,20 @@ header h1.post-title.main-title {
   top: -50px;
   width: 80%;
 }
+a.no-underline {
+  text-decoration: none;
+}
+a.no-underline > header > p:last-child {
+  text-decoration: underline;
+}
 header.main-header {
-  min-height: 20px;
+  background-color: #daf6dd;
+  font-family: "Open Sans",sans-serif;
+  padding: 40px 30% 1px 40px;
+  width: 120%;
+}
+#globe {
+  position: absolute;
 }
 #globe {
   position: absolute;
