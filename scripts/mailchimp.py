@@ -4,34 +4,38 @@ import json
 import requests
 import sqlite3
 
+from databases import get_voyage_connection
 
-def transfer(api_key, db_voyage):
+
+def transfer(api_key):
     transfered_mails = get_mailchimp_mails(api_key)
-    ghost_mails = get_ghost_mails(db_voyage)
+    ghost_mails = get_ghost_mails()
     mails_to_tranfer = ghost_mails - transfered_mails
     add_mails_to_mailchimp(api_key, mails_to_tranfer)
 
 
 def get_mailchimp_mails(api_key):
     print("[1/3] Get mails from mailchimp")
-    mails = requests.get("https://us14.api.mailchimp.com/3.0/lists/3d9abf3837/members",
-                        auth=("pouet", api_key)).json()
+    mails = requests.get("https://us14.api.mailchimp.com/"
+                         "3.0/lists/3d9abf3837/members",
+                         auth=("pouet", api_key)).json()
     return set([member["email_address"] for member in mails["members"]])
 
 
-def get_ghost_mails(db_voyage):
+def get_ghost_mails():
     print("[2/3] Get mails from blog subscribers")
-    ghost = sqlite3.connect(db_voyage)
-    ghost_cur = ghost.cursor()
-    ghost_cur.execute("SELECT email FROM subscribers")
-    return set([str(mail[0]) for mail in ghost_cur.fetchall()])
+    ghost = get_voyage_connection()
+    with ghost.cursor() as ghost_cur:
+        ghost_cur.execute("SELECT email FROM subscribers")
+        return set([str(mail[0]) for mail in ghost_cur.fetchall()])
 
 
 def add_mails_to_mailchimp(api_key, mails):
     print("[3/3] Transfer to mailchimp")
     print("%s mails to transfer" % len(mails))
     for mail in mails:
-        r = requests.post("https://us14.api.mailchimp.com/3.0/lists/3d9abf3837/members",
+        r = requests.post("https://us14.api.mailchimp.com/"
+                          "3.0/lists/3d9abf3837/members",
                           auth=("pouet", api_key),
                           data=json.dumps({"email_address": mail,
                                            "status": "subscribed"}))

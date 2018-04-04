@@ -12,6 +12,7 @@ from whoosh.filedb.filestore import FileStorage
 from whoosh.qparser import MultifieldParser
 
 import conf
+from databases import get_voyage_connection
 from bootstrap import application, mail
 from forms import ContactForm
 from utils.cleaner import clean_string
@@ -61,16 +62,16 @@ Website: %s
 
 @application.route("/baloo-notre-camping-car/related")
 def camping_car_linked_posts():
-    ghost = sqlite3.connect(conf.BLOG_VOYAGE_DB)
-    ghost_cur = ghost.cursor()
-    ghost_cur.execute("SELECT title, image, html, slug FROM posts WHERE id IN "
-                      "(SELECT post_id FROM posts_tags WHERE tag_id=1) "
-                      "AND published_at < DATE('now') "
-                      "ORDER BY published_at DESC")
-    posts = [{'title': i[0],
-              'image': i[1],
-              'excerpt': excerpt(i[2]),
-              'slug': i[3]} for i in ghost_cur.fetchall()]
+    ghost = get_voyage_connection()
+    with ghost.cursor() as ghost_cur:
+        ghost_cur.execute("SELECT title, feature_image, html, slug FROM posts WHERE id IN "
+                          "(SELECT post_id FROM posts_tags WHERE tag_id='5ac409562047a612a5993733') "
+                          "AND published_at < NOW() "
+                          "ORDER BY published_at DESC")
+        posts = [{'title': i[0],
+                  'image': i[1],
+                  'excerpt': excerpt(i[2]),
+                  'slug': i[3]} for i in ghost_cur.fetchall()]
     ghost.close()
     return render_template('camping_car/linked_posts.html', posts=posts,
                            current="camping_car", panel="linked_posts")
@@ -78,15 +79,15 @@ def camping_car_linked_posts():
 
 @application.route("/qui-sommes-nous/related")
 def who_are_we_linked_posts():
-    ghost = sqlite3.connect(conf.BLOG_MELMELBOO_DB)
-    ghost_cur = ghost.cursor()
-    ghost_cur.execute("SELECT title, image FROM posts WHERE id IN "
-                      "(SELECT post_id FROM posts_tags WHERE tag_id=36) "
-                      "AND strftime('%Y', published_at)='2016' "
-                      "AND published_at < DATE('now') "
-                      "ORDER BY published_at DESC")
-    images = [{'title': i[0],
-               'image': i[1]} for i in ghost_cur.fetchall()]
+    ghost = get_voyage_connection()
+    with ghost.cursor() as ghost_cur:
+        ghost_cur.execute("SELECT title, feature_image FROM posts WHERE id IN "
+                          "(SELECT post_id FROM posts_tags WHERE tag_id='5ac409562047a612a5993747') "
+                          "AND strftime('%Y', published_at)='2016' "
+                          "AND published_at < NOW() "
+                          "ORDER BY published_at DESC")
+        images = [{'title': i[0],
+                   'image': i[1]} for i in ghost_cur.fetchall()]
     ghost.close()
     return render_template('/who_are_we/linked_posts.html', images=images,
                            current="who_are_we",
@@ -192,18 +193,18 @@ def update_coords(latitude, longitude):
 
 @application.route("/itinerary/related/<country>")
 def itinerary_linked_posts(country):
-    ghost = sqlite3.connect(conf.BLOG_VOYAGE_DB)
-    ghost_cur = ghost.cursor()
-    ghost_cur.execute("SELECT title, image, html, slug FROM posts WHERE id IN "
-                      "(SELECT post_id FROM posts_tags "
-                      " LEFT JOIN tags ON posts_tags.tag_id=tags.id "
-                      " WHERE tags.name=?) "
-                      "AND published_at < DATETIME('now') "
-                      "ORDER BY published_at DESC", (country, ))
-    posts = [{'title': i[0],
-              'image': i[1],
-              'excerpt': excerpt(i[2]),
-              'slug': i[3]} for i in ghost_cur.fetchall()]
+    ghost = get_voyage_connection()
+    with ghost.cursor() as ghost_cur:
+        ghost_cur.execute("SELECT title, feature_image, html, slug FROM posts WHERE id IN "
+                          "(SELECT post_id FROM posts_tags "
+                          " LEFT JOIN tags ON posts_tags.tag_id=tags.id "
+                          " WHERE tags.name=%s) "
+                          "AND published_at < NOW() "
+                          "ORDER BY published_at DESC", (country, ))
+        posts = [{'title': i[0],
+                  'image': i[1],
+                  'excerpt': excerpt(i[2]),
+                  'slug': i[3]} for i in ghost_cur.fetchall()]
     ghost.close()
     has_top_img = os.path.isfile("img/articles/Bilan_%s.png" % country.capitalize())
     return render_template('itinerary/linked_posts.html', posts=posts,
@@ -214,44 +215,45 @@ def itinerary_linked_posts(country):
 
 @application.route("/zero_waste")
 def zero_waste_posts():
-    ghost = sqlite3.connect(conf.BLOG_VOYAGE_DB)
-    ghost_cur = ghost.cursor()
-    ghost_cur.execute("SELECT title, image, html, slug FROM posts WHERE id IN "
-                      "(SELECT post_id FROM posts_tags WHERE tag_id=17) "
-                      "AND published_at < DATE('now') "
-                      "ORDER BY published_at DESC")
-    posts = [{'title': i[0],
-              'image': i[1],
-              'excerpt': excerpt(i[2]),
-              'slug': '/blog/' + i[3]} for i in ghost_cur.fetchall()]
+    ghost = get_voyage_connection()
+    with ghost.cursor() as ghost_cur:
+        ghost_cur.execute("SELECT title, feature_image, html, slug FROM posts WHERE id IN "
+                          "(SELECT post_id FROM posts_tags WHERE tag_id='5ac409562047a612a5993736') "
+                          "AND published_at < NOW() "
+                          "ORDER BY published_at DESC")
+        posts = [{'title': i[0],
+                  'image': i[1],
+                  'excerpt': excerpt(i[2]),
+                  'slug': '/blog/' + i[3]} for i in ghost_cur.fetchall()]
     ghost.close()
-    melmelboo = sqlite3.connect(conf.BLOG_MELMELBOO_DB)
+    melmelboo = get_voyage_connection()
     melmelboo_cur = melmelboo.cursor()
-    melmelboo_cur.execute("SELECT title, image, html, slug FROM posts WHERE id IN "
-                      "(SELECT post_id FROM posts_tags WHERE tag_id=52) "
-                      "AND published_at < DATE('now') "
-                      "ORDER BY published_at DESC")
-    for i in melmelboo_cur.fetchall():
-        posts.append({'title': i[0],
-                      'image': i[1],
-                      'excerpt': excerpt(i[2]),
-                      'slug': '//melmelboo.fr/blog/' + i[3]})
-    melmelboo_cur.close()
+    with melmelboo.cursor() as melmelboo_cur:
+        melmelboo_cur.execute("SELECT title, feature_image, html, slug FROM posts WHERE id IN "
+                          "(SELECT post_id FROM posts_tags WHERE tag_id='5ac410167526de286e2664c1') "
+                          "AND published_at < NOW() "
+                          "ORDER BY published_at DESC")
+        for i in melmelboo_cur.fetchall():
+            posts.append({'title': i[0],
+                          'image': i[1],
+                          'excerpt': excerpt(i[2]),
+                          'slug': '//melmelboo.fr/blog/' + i[3]})
+    melmelboo.close()
     return render_template('project/zero_waste.html', posts=posts,
                            current="project", panel="zero_waste")
 
 @application.route("/preparation/related")
 def planning_linked_posts():
-    ghost = sqlite3.connect(conf.BLOG_VOYAGE_DB)
-    ghost_cur = ghost.cursor()
-    ghost_cur.execute("SELECT title, image, html, slug FROM posts WHERE id IN "
-                      "(SELECT post_id FROM posts_tags WHERE tag_id=8) "
-                      "AND published_at < DATE('now') "
-                      "ORDER BY published_at DESC")
-    posts = [{'title': i[0],
-              'image': i[1],
-              'excerpt': excerpt(i[2]),
-              'slug': i[3]} for i in ghost_cur.fetchall()]
+    ghost = get_voyage_connection()
+    with ghost.cursor() as ghost_cur:
+        ghost_cur.execute("SELECT title, feature_image, html, slug FROM posts WHERE id IN "
+                          "(SELECT post_id FROM posts_tags WHERE tag_id='5ac409562047a612a599372d') "
+                          "AND published_at < NOW() "
+                          "ORDER BY published_at DESC")
+        posts = [{'title': i[0],
+                  'image': i[1],
+                  'excerpt': excerpt(i[2]),
+                  'slug': i[3]} for i in ghost_cur.fetchall()]
     ghost.close()
     return render_template('planning/linked_posts.html', posts=posts,
                            current="preparation", panel="linked_posts")
@@ -269,19 +271,21 @@ def search(page):
     with index.searcher() as searcher:
         results = searcher.search_page(q, page, pagelen=conf.PAGE_SIZE)
         # Get real posts
-        post_ids = ",".join([p['post_id'] for p in results
+        post_ids = ",".join(["'%s'" % p['post_id'] for p in results
                              if not p['post_id'].startswith('static-')])
-        ghost = sqlite3.connect(conf.BLOG_VOYAGE_DB)
-        ghost_cur = ghost.cursor()
-        ghost_cur.execute("SELECT title, image, html, slug "
-                          "FROM posts WHERE id IN (%s) "
-                          "ORDER BY published_at DESC" % post_ids)
-        posts = [{'type': "post",
-                  'title': i[0],
-                  'image': i[1],
-                  'excerpt': excerpt(i[2]),
-                  'url': "/blog/" + i[3]} for i in ghost_cur.fetchall()]
-        ghost.close()
+        if post_ids:
+            ghost = get_voyage_connection()
+            with ghost.cursor() as ghost_cur:
+                query = "SELECT title, feature_image, html, slug FROM posts WHERE id IN (%s) ORDER BY published_at DESC" % post_ids
+                ghost_cur.execute(query)
+                posts = [{'type': "post",
+                          'title': i[0],
+                          'image': i[1],
+                          'excerpt': excerpt(i[2]),
+                          'url': "/blog/" + i[3]} for i in ghost_cur.fetchall()]
+            ghost.close()
+        else:
+            posts = []
         # Get static pages
         for p in results:
             if p['post_id'].startswith('static-'):

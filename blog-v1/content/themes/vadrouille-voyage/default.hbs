@@ -7,7 +7,6 @@
 
     {{!-- Page Meta --}}
     <title>{{meta_title}}</title>
-    <meta name="description" content="{{meta_description}}" />
     <meta name="keywords" content="voyage, voyage en famille, voyage en camping car, tour autour du monde, tourdumondiste" />
 
     {{!-- Mobile Meta --}}
@@ -41,7 +40,7 @@
     <meta property="og:locale" content="fr_FR" />
     {{#is "post"}}
       {{#post}}
-        <meta property="og:image" content="{{image absolute='true'}}" />
+        <meta property="og:image" content="{{img_url feature_image absolute='true'}}" />
       {{/post}}
     {{else}}
       <meta property="og:image" content="{{@blog.url}}{{@blog.logo}}" />

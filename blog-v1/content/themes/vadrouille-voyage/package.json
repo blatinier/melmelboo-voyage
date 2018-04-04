@@ -1,0 +1,10 @@
+{
+  "name": "vadrouille",
+  "version": "1.0.0",
+  "author": {
+    "email": "benoit@latinier.fr"
+  },
+  "config": {
+    "posts_per_page": 6
+  }
+}
